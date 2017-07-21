@@ -1,4 +1,4 @@
-package ua.itea.dao;
+package ua.itea.dao.jdbc;
 
 
 import org.apache.commons.logging.Log;
@@ -12,15 +12,16 @@ import java.sql.SQLException;
 /**
  * Клас реалізує підключення до Бази данних
  */
-public class ManagerJDBC {
+public class LocalManagerJDBC implements ManagerJDBC {
 
     private Log log = LogFactory.getLog(getClass());
 
-    private final String URL = "jdbc:postgresql://ec2-79-125-5-199.eu-west-1.compute.amazonaws.com:5432/dcogjakbcm9051";
-    private final String LOGIN = "clbkfqyykwplrn";
-    private final String PASSWORD = "861835dc32f50fb4199319fd404196b29906cd9bf97b768f7074c27a71ee8eb9";
+    private final String URL = "jdbc:postgresql://localhost:5432/postgres";
+    private final String LOGIN = "postgres";
+    private final String PASSWORD = "postgres";
 
-    public ManagerJDBC() {
+
+    public LocalManagerJDBC() {
         try {
             Class.forName("org.postgresql.Driver");
         } catch (ClassNotFoundException e) {
@@ -30,12 +31,14 @@ public class ManagerJDBC {
 
     private Connection connection;
 
+    @Override
     public Connection getConnection() throws SQLException {
         log.info(URL);
         connection = DriverManager.getConnection(URL, LOGIN, PASSWORD);
         return connection;
     }
 
+    @Override
     public void connectionClose() {
         if (connection != null) {
             try {

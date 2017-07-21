@@ -2,6 +2,8 @@ package ua.itea.dao;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import ua.itea.dao.jdbc.LocalManagerJDBC;
+import ua.itea.dao.jdbc.ManagerJDBC;
 
 import java.sql.*;
 
@@ -13,7 +15,7 @@ import java.sql.*;
 abstract class AbstractDAO<E> implements DAO<E> {
 
     protected Log log = LogFactory.getLog(getClass());
-    private static ManagerJDBC manager = new ManagerJDBC();
+    private static ManagerJDBC manager = new LocalManagerJDBC();
     private Connection connection;
 
     protected AbstractDAO() {
