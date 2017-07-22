@@ -19,8 +19,8 @@ Released : 20110926
     <meta name="description" content=""/>
     <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
     <title>Flora</title>
-    <link rel="icon" href="images/ico/flora.png" type="image/png">
-    <link href="css/PhotoshootStyle.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link rel="icon" href="../images/ico/flora.png" type="image/png">
+    <link href="../css/PhotoshootStyle.css" rel="stylesheet" type="text/css" media="screen"/>
 </head>
 <body>
 <div id="header" class="container">
@@ -39,26 +39,26 @@ Released : 20110926
 <div id="poptrox">
     <!-- start -->
     <ul id="gallery">
-        <li><a href="images/header/chamomile_960x600.jpg">
-            <img src="images/header/chamomile_210x130.jpg"
+        <li><a href="../images/header/chamomile_960x600.jpg">
+            <img src="../images/header/chamomile_210x130.jpg"
                  title="flower"
                  alt=""/>
         </a>
         </li>
-        <li><a href="images/header/convalia_960x600.jpg">
-            <img src="images/header/convalia_210x130.jpg"
+        <li><a href="../images/header/convalia_960x600.jpg">
+            <img src="../images/header/convalia_210x130.jpg"
                  title="flower"
                  alt=""/>
         </a>
         </li>
-        <li><a href="images/header/glycine_960x600.jpg">
-            <img src="images/header/glycine_210x130.jpg"
+        <li><a href="../images/header/glycine_960x600.jpg">
+            <img src="../images/header/glycine_210x130.jpg"
                  title="flower"
                  alt=""/>
         </a>
         </li>
-        <li><a href="images/header/snowdrop_960x600.jpg">
-            <img src="images/header/snowdrop_210x130.jpg"
+        <li><a href="../images/header/snowdrop_960x600.jpg">
+            <img src="../images/header/snowdrop_210x130.jpg"
                  title="flower"
                  alt=""/>
         </a>

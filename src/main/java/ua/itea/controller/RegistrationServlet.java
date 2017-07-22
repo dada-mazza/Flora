@@ -17,9 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-/**
- * Created by dada.mazza on 17.07.2017.
- */
 @WebServlet("/registration")
 public class RegistrationServlet extends HttpServlet {
 

@@ -3,7 +3,7 @@
 
 <%@include file="header.jsp" %>
 
-<link href="css/product.css" rel="stylesheet" type="text/css"/>
+<link href="../css/product.css" rel="stylesheet" type="text/css"/>
 
 <jsp:useBean id="productsBean" class="ua.itea.beans.ProductsBean">
     <jsp:setProperty name="productsBean" property="categoryId" value="${param.categoryId}"/>
