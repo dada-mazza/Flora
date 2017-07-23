@@ -1,4 +1,4 @@
-package ua.itea.hecker;
+package ua.itea.checker;
 
 /**
  * Created by dada.mazza on 10.07.2017.

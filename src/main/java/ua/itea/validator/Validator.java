@@ -2,9 +2,9 @@ package ua.itea.validator;
 
 import org.apache.commons.lang3.StringUtils;
 import org.joda.time.DateTime;
+import ua.itea.checker.Checker;
 import ua.itea.dao.UserDAO;
 import ua.itea.entity.Gender;
-import ua.itea.hecker.Checker;
 
 import java.util.ArrayList;
 import java.util.List;
