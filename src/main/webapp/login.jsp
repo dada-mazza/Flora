@@ -57,7 +57,7 @@
                                                 id="inputEmailRegistration"
                                                 placeholder="Email"
                                                 value="${param.inputEmailRegistration}"
-
+                                                required
                                         >
                                     </div>
                                 </div>

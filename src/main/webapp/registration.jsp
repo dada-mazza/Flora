@@ -50,7 +50,7 @@
                         <div class="control-group">
                             <label class="control-label" for="inputEmail">Email <sup>*</sup></label>
                             <div class="controls">
-                                <input type="email" name="inputEmail" id="inputEmail" placeholder="Email"
+                                <input type="email" name="inputEmail" id="inputEmail" placeholder="Email" required
                                 <c:choose>
                                 <c:when test="${not empty email}">
                                        value="${email}"
@@ -79,6 +79,7 @@
                             <label class="control-label" for="inputPassword">Password <sup>*</sup></label>
                             <div class="controls">
                                 <input type="password" name="inputPassword" id="inputPassword" placeholder="Password"
+                                       required
                                        value="${param.inputPassword}">
                             </div>
                         </div>
@@ -100,7 +101,7 @@
                                 <sup>*</sup></label>
                             <div class="controls">
                                 <input type="password" name="inputConfirmPassword" id="inputConfirmPassword"
-                                       placeholder="Confirm Password" value="${param.inputConfirmPassword}">
+                                       placeholder="Confirm Password" required value="${param.inputConfirmPassword}">
                             </div>
                         </div>
 
@@ -120,7 +121,7 @@
                             <label class="control-label" for="inputFirstName">First name <sup>*</sup></label>
                             <div class="controls">
                                 <input type="text" name="inputFirstName" id="inputFirstName"
-                                       placeholder="First Name" value="${param.inputFirstName}">
+                                       placeholder="First Name" required value="${param.inputFirstName}">
                             </div>
                         </div>
 
@@ -140,7 +141,7 @@
                             <label class="control-label" for="inputLastName">Last name <sup>*</sup></label>
                             <div class="controls">
                                 <input type="text" name="inputLastName" id="inputLastName"
-                                       placeholder="Last Name" value="${param.inputLastName}">
+                                       placeholder="Last Name" required value="${param.inputLastName}">
                             </div>
                         </div>
 
@@ -160,7 +161,7 @@
                         <div class="control-group">
                             <label class="control-label">Date of Birth <sup>*</sup></label>
                             <div class="controls">
-                                <select class="span1" name="selectYear">
+                                <select class="span1" name="selectYear" required>
                                     <option value="">-</option>
                                     <c:forEach var="yearOfBirth" begin="1900" end="2015">
                                         <c:choose>
@@ -173,7 +174,7 @@
                                         </c:choose>
                                     </c:forEach>
                                 </select>
-                                <select class="span1" name="selectMonth">
+                                <select class="span1" name="selectMonth" required>
                                     <option value="">-</option>
                                     <c:forEach var="monthOfBirth" begin="1" end="12">
                                         <c:choose>
@@ -186,7 +187,7 @@
                                         </c:choose>
                                     </c:forEach>
                                 </select>
-                                <select class="span1" name="selectDay">
+                                <select class="span1" name="selectDay" required>
                                     <option value="">-</option>
                                     <c:forEach var="dayOfBirth" begin="1" end="31">
                                         <c:choose>
@@ -219,7 +220,7 @@
                         <div class="control-group">
                             <label class="control-label">Gender <sup>*</sup></label>
                             <div class="controls">
-                                <select class="span1" name="selectGender">
+                                <select class="span1" name="selectGender" required>
                                     <option value="">-</option>
                                     <option
                                             <c:if test="${param.selectGender eq 'Male'}">selected</c:if>
@@ -251,7 +252,7 @@
                             <label class="control-label" for="inputAddress">Address<sup>*</sup></label>
                             <div class="controls">
                                 <input type="text" name="inputAddress" id="inputAddress"
-                                       placeholder="Adress" value="${param.inputAddress}">
+                                       placeholder="Adress" required value="${param.inputAddress}">
                                 <span>Apartment, building, street address</span>
                             </div>
                         </div>
@@ -271,7 +272,7 @@
                         <div class="control-group">
                             <label class="control-label" for="inputCity">Phone <sup>*</sup></label>
                             <div class="controls">
-                                <input type="text" name="inputCity" id="inputCity" placeholder="City"
+                                <input type="text" name="inputCity" id="inputCity" placeholder="City" required
                                        value="${param.inputCity}">
                             </div>
                         </div>
@@ -292,7 +293,7 @@
                             <label class="control-label" for="inputPhone">Phone <sup>*</sup></label>
                             <div class="controls">
                                 <input type="text" name="inputPhone" id="inputPhone"
-                                       placeholder="Phone" value="${param.inputPhone}">
+                                       placeholder="Phone" required value="${param.inputPhone}">
                             </div>
                         </div>
 
