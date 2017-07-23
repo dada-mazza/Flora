@@ -21,10 +21,7 @@ public class LoginServlet extends HttpServlet {
     protected Log log = LogFactory.getLog(getClass());
 
     @Override
-    public void service(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
-        log.info("url : " + request.getRequestURI());
-        log.info("method : " + request.getMethod());
+    public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
@@ -36,28 +33,51 @@ public class LoginServlet extends HttpServlet {
             return;
         }
 
-        String email = request.getParameter("email");
-        if (email != null) {
-            String password = request.getParameter("password");
-            String md5Password = MD5Util.md5Apache(password);
-            user = new UserDAO().getEntityByEmail(email);
+        if (request.getMethod().equals("GET")) {
+            get(request, response);
+        } else if (request.getMethod().equals("POST")) {
+            post(request, response);
+        }
+    }
 
-            if (email.equals(user.getEmail())
+    private void get(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String forwardURL = "/login.jsp";
+        log.info("forward : " + forwardURL);
+        request.getRequestDispatcher(forwardURL).forward(request, response);
+        return;
+    }
+
+    private void post(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        HttpSession session = request.getSession();
+
+        String submit = request.getParameter("submit");
+        log.info("submit : " + submit);
+        if (submit != null && submit.equals("Sign In")) {
+            String email = request.getParameter("inputEmailLogin");
+            String password = request.getParameter("inputPasswordLogin");
+            String md5Password = MD5Util.md5Apache(password);
+            User user = new UserDAO().getEntityByEmail(email);
+
+            if (user != null
+                    && email.equals(user.getEmail())
                     && md5Password.equals(user.getPassword())) {
-                log.info("access granted for " + user.getEmail());
+                log.info("access granted for " + email);
                 session.setAttribute("user", user);
-                String redirectURL = "/products";
+                String redirectURL = "/";
                 log.info("redirect : " + redirectURL);
                 response.sendRedirect(redirectURL);
                 return;
             } else {
-                log.info("access denied for " + user.getEmail());
-                request.setAttribute("errorMessage", "I don't now you !!! Sing Up, please");
+                log.info("access denied for " + email);
+                request.setAttribute("errorMessage", "Enter the correct data or Sing Up, please");
             }
         }
 
         String forwardURL = "/login.jsp";
         log.info("forward : " + forwardURL);
         request.getRequestDispatcher(forwardURL).forward(request, response);
+        return;
     }
 }

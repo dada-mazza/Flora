@@ -1,16 +1,15 @@
 package ua.itea.dao;
 
+import org.joda.time.DateTime;
 import ua.itea.entity.Gender;
 import ua.itea.entity.User;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO extends AbstractDAO<User> {
+
     private final String NAME_TABLE = "users";
 
     public UserDAO() {
@@ -22,11 +21,14 @@ public class UserDAO extends AbstractDAO<User> {
         user.setId(resultSet.getLong("id"));
         user.setEmail(resultSet.getString("email"));
         user.setPassword(resultSet.getString("password"));
-        user.setFirstName(resultSet.getString("firstName"));
-        user.setSecondName(resultSet.getString("secondName"));
-        user.setRegion(resultSet.getString("region"));
+        user.setFirstName(resultSet.getString("first_name"));
+        user.setLastName(resultSet.getString("second_name"));
+        user.setDateOfBirth(new DateTime(resultSet.getDate("date_of_birth")));
         user.setGender(Gender.valueOf(resultSet.getString("gender")));
-        user.setSubscription(resultSet.getBoolean("subscription"));
+        user.setAddress(resultSet.getString("address"));
+        user.setCity(resultSet.getString("city"));
+        user.setPhoneNumber(resultSet.getString("phone_number"));
+        user.setAdditionalInformation(resultSet.getString("additional_information"));
         return user;
     }
 
@@ -34,8 +36,17 @@ public class UserDAO extends AbstractDAO<User> {
     public Long create(User user) {
 
         String sql = "INSERT INTO " + NAME_TABLE
-                + " (email, password, firstName, secondName, region, gender, subscription)"
-                + " VALUES (?, ?, ?, ?, ?, ?, ?)";
+                + " (email,"
+                + " password,"
+                + " first_name,"
+                + " second_name,"
+                + " date_of_birth,"
+                + " gender,"
+                + " address,"
+                + " city,"
+                + " phone_number,"
+                + " additional_information)"
+                + " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         log.info(sql);
         try {
@@ -43,10 +54,13 @@ public class UserDAO extends AbstractDAO<User> {
             statement.setString(1, user.getEmail());
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getFirstName());
-            statement.setString(4, user.getSecondName());
-            statement.setString(5, user.getRegion());
+            statement.setString(4, user.getLastName());
+            statement.setDate(5, new Date(user.getDateOfBirth().getMillis()));
             statement.setString(6, user.getGender().name());
-            statement.setBoolean(7, user.isSubscription());
+            statement.setString(7, user.getAddress());
+            statement.setString(8, user.getCity());
+            statement.setString(9, user.getPhoneNumber());
+            statement.setString(10, user.getAdditionalInformation());
 
             if (statement.executeUpdate() == 0) {
                 throw new SQLException("Creating User failed, no rows affected.");
@@ -89,7 +103,16 @@ public class UserDAO extends AbstractDAO<User> {
     @Override
     public boolean update(User user) {
         String sql = "UPDATE " + NAME_TABLE + " "
-                + " SET email=?, password=?, firstName=?, secondName=?, region=?, gender=?, subscription=?"
+                + " SET email=?,"
+                + " password=?,"
+                + " first_name=?,"
+                + " second_name=?,"
+                + " date_of_birth=?,"
+                + " gender=?,"
+                + " address=?,"
+                + " city=?,"
+                + " phone_number=?,"
+                + " additional_information=?)"
                 + " WHERE"
                 + " id = " + user.getId();
         log.info(sql);
@@ -99,10 +122,13 @@ public class UserDAO extends AbstractDAO<User> {
             statement.setString(1, user.getEmail());
             statement.setString(2, user.getPassword());
             statement.setString(3, user.getFirstName());
-            statement.setString(4, user.getSecondName());
-            statement.setString(5, user.getRegion());
+            statement.setString(4, user.getLastName());
+            statement.setDate(5, new Date(user.getDateOfBirth().getMillis()));
             statement.setString(6, user.getGender().name());
-            statement.setBoolean(7, user.isSubscription());
+            statement.setString(7, user.getAddress());
+            statement.setString(8, user.getCity());
+            statement.setString(9, user.getPhoneNumber());
+            statement.setString(10, user.getAdditionalInformation());
 
             if (statement.executeUpdate() == 0) {
                 throw new SQLException("Updating User failed, no rows affected.");

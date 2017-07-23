@@ -1,5 +1,8 @@
 package ua.itea.entity;
 
+
+import org.joda.time.DateTime;
+
 /**
  * Created by dada.mazza on 30.06.2017.
  */
@@ -9,22 +12,29 @@ public class User {
     private String email;
     private String password;
     private String firstName;
-    private String secondName;
-    private String region;
+    private String lastName;
+    private DateTime dateOfBirth;
     private Gender gender;
-    private boolean subscription;
+    private String address;
+    private String city;
+    private String phoneNumber;
+    private String additionalInformation;
 
     public User() {
     }
 
-    public User(String email, String password, String firstName, String secondName, String region, String comment, Gender gender, boolean subscription) {
+    public User(Long id, String email, String password, String firstName, String lastName, DateTime dateOfBirth, Gender gender, String address, String city, String additionalInformation, String phoneNumber) {
+        this.id = id;
         this.email = email;
         this.password = password;
         this.firstName = firstName;
-        this.secondName = secondName;
-        this.region = region;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
         this.gender = gender;
-        this.subscription = subscription;
+        this.address = address;
+        this.city = city;
+        this.additionalInformation = additionalInformation;
+        this.phoneNumber = phoneNumber;
     }
 
     public Long getId() {
@@ -59,20 +69,20 @@ public class User {
         this.firstName = firstName;
     }
 
-    public String getSecondName() {
-        return secondName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
+    public void setLastName(String secondName) {
+        this.lastName = secondName;
     }
 
-    public String getRegion() {
-        return region;
+    public DateTime getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setRegion(String region) {
-        this.region = region;
+    public void setDateOfBirth(DateTime dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     public Gender getGender() {
@@ -83,25 +93,35 @@ public class User {
         this.gender = gender;
     }
 
-    public boolean isSubscription() {
-        return subscription;
+    public String getAddress() {
+        return address;
     }
 
-    public void setSubscription(boolean subscription) {
-        this.subscription = subscription;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                ", firstName='" + firstName + '\'' +
-                ", secondName='" + secondName + '\'' +
-                ", region='" + region + '\'' +
-                ", gender=" + gender +
-                ", subscription=" + subscription +
-                '}';
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getAdditionalInformation() {
+        return additionalInformation;
+    }
+
+    public void setAdditionalInformation(String additionalInformation) {
+        this.additionalInformation = additionalInformation;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }

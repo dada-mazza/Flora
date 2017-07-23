@@ -3,6 +3,7 @@ package ua.itea.controller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.joda.time.DateTime;
 import ua.itea.dao.UserDAO;
 import ua.itea.entity.Gender;
 import ua.itea.entity.User;
@@ -25,9 +26,6 @@ public class RegistrationServlet extends HttpServlet {
     @Override
     public void service(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
-        log.info("url : " + request.getRequestURI());
-        log.info("method : " + request.getMethod());
-
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 
@@ -38,56 +36,119 @@ public class RegistrationServlet extends HttpServlet {
             return;
         }
 
-        String action = request.getParameter("registrationAction");
-        if (action != null) {
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
-            String confirmPassword = request.getParameter("confirmPassword");
-            String firstName = request.getParameter("firstName");
-            String secondName = request.getParameter("secondName");
-            String region = request.getParameter("region");
-            String gender = request.getParameter("gender");
-            Boolean subscription = Boolean.getBoolean(request.getParameter("subscription"));
+        if (request.getMethod().equals("GET")) {
+            get(request, response);
+        } else if (request.getMethod().equals("POST")) {
+            post(request, response);
+        }
+    }
+
+    private void get(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        String forwardURL = "/login.jsp";
+        log.info("forward : " + forwardURL);
+        request.getRequestDispatcher(forwardURL).forward(request, response);
+        return;
+    }
+
+    private void post(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        HttpSession session = request.getSession();
+        String submit = request.getParameter("submit");
+        log.info("submit : " + submit);
+        if (submit != null && submit.equals("Sign Up Email")) {
+            String email = request.getParameter("inputEmailRegistration");
+            Validator validator = new Validator();
+            validator.setEmail(email);
+            if (validator.isValidEmail()) {
+                log.info("Email is valid : " + email);
+                request.setAttribute("email", email);
+                String forwardURL = "/registration.jsp";
+                log.info("forward : " + forwardURL);
+                request.getRequestDispatcher(forwardURL).forward(request, response);
+                return;
+            } else {
+                log.info("Email is not valid : " + email);
+                request.setAttribute("validator", validator);
+                String forwardURL = "/login.jsp";
+                log.info("forward : " + forwardURL);
+                request.getRequestDispatcher(forwardURL).forward(request, response);
+                return;
+            }
+        } else if (submit != null && submit.equals("Register")) {
+            String email = request.getParameter("inputEmail");
+            String password = request.getParameter("inputPassword");
+            String confirmPassword = request.getParameter("inputConfirmPassword");
+            String firstName = request.getParameter("inputFirstName");
+            String lastName = request.getParameter("inputLastName");
+            String yearOfBirth = request.getParameter("selectYear");
+            String monthOfBirth = request.getParameter("selectMonth");
+            String dayOfBirth = request.getParameter("selectDay");
+            String gender = request.getParameter("selectGender");
+            String address = request.getParameter("inputAddress");
+            String city = request.getParameter("inputCity");
+            String phoneNumber = request.getParameter("inputPhone");
+            String additionalInformation = request.getParameter("textareaAdditionalInformation");
 
             Validator validator = new Validator();
             validator.setEmail(email);
             validator.setPassword(password);
             validator.setConfirmPassword(confirmPassword);
             validator.setFirstName(firstName);
-            validator.setSecondName(secondName);
-            validator.setRegion(region);
+            validator.setLastName(lastName);
+            validator.setYearOfBirth(yearOfBirth);
+            validator.setMonthOfBirth(monthOfBirth);
+            validator.setDayOfBirth(dayOfBirth);
             validator.setGender(gender);
-            validator.setSubscription(subscription);
+            validator.setAddress(address);
+            validator.setCity(city);
+            validator.setPhoneNumber(phoneNumber);
+            validator.setAdditionalInformation(additionalInformation);
 
-            if (validator.getValid()) {
-                user = new User();
+            if (validator.isValid()) {
+                User user = new User();
                 user.setEmail(email);
                 user.setPassword(MD5Util.md5Apache(password));
                 user.setFirstName(firstName);
-                user.setSecondName(secondName);
-                user.setRegion(region);
+                user.setLastName(lastName);
+                user.setDateOfBirth(new DateTime(
+                        Integer.parseInt(yearOfBirth),
+                        Integer.parseInt(monthOfBirth),
+                        Integer.parseInt(dayOfBirth),
+                        0, 0));
                 user.setGender(Gender.valueOf(gender));
-                user.setSubscription(subscription);
+                user.setAddress(address);
+                user.setCity(city);
+                user.setPhoneNumber(phoneNumber);
+                user.setAdditionalInformation(additionalInformation);
+
                 user.setId(new UserDAO().create(user));
 
                 if (user.getId() != null) {
-                    log.info("registered for " + user.getEmail());
+                    log.info("User has bean registered : " + email);
                     session.setAttribute("user", user);
-                    String redirectURL = "/products";
+                    String redirectURL = "/";
                     log.info("redirect : " + redirectURL);
                     response.sendRedirect(redirectURL);
                     return;
                 } else {
-                    log.info("registration error for " + user.getEmail());
+                    log.info("registration error for " + email);
                     request.setAttribute("errorMessage", "Registration error. Try later!");
                 }
+
             } else {
+                log.info("User has not bean registered : " + email);
                 request.setAttribute("validator", validator);
+                String forwardURL = "/registration.jsp";
+                log.info("forward : " + forwardURL);
+                request.getRequestDispatcher(forwardURL).forward(request, response);
+                return;
             }
         }
 
-        String forwardURL = "/registration.jsp";
+        String forwardURL = "/login.jsp";
         log.info("forward : " + forwardURL);
         request.getRequestDispatcher(forwardURL).forward(request, response);
+        return;
     }
 }

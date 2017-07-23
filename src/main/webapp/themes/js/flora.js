@@ -1,4 +1,3 @@
-//Bootsshop-----------------------//
 $(document).ready(function () {
     /* carousel of home page animation */
     $('#myCarousel').carousel({

@@ -11,20 +11,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/logout")
-public class LogoutServlet extends HttpServlet {
+@WebServlet("/forgotPassword")
+public class ForgotPasswordServlet extends HttpServlet {
 
     protected Log log = LogFactory.getLog(getClass());
 
     @Override
-    public void service(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+    public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        request.getSession().invalidate();
-        request.getSession();
-        String redirectURL = "/login";
-        log.info("redirect : " + redirectURL);
-        response.sendRedirect(redirectURL);
-        return;
-
+        String forwardURL = "/forgotPassword.jsp";
+        log.info("forward : " + forwardURL);
+        request.getRequestDispatcher(forwardURL).forward(request, response);
     }
 }

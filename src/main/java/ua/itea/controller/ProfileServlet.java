@@ -1,14 +1,9 @@
 package ua.itea.controller;
 
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import ua.itea.dao.UserDAO;
-import ua.itea.entity.Gender;
 import ua.itea.entity.User;
-import ua.itea.md5.MD5Util;
-import ua.itea.validator.Validator;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -40,7 +35,7 @@ public class ProfileServlet extends HttpServlet {
         }
 
         String action = request.getParameter("profileAction");
-
+/*
         if (StringUtils.equals(action, "edit")) {
             String password = request.getParameter("password");
             String confirmPassword = request.getParameter("confirmPassword");
@@ -54,7 +49,7 @@ public class ProfileServlet extends HttpServlet {
             validator.setPassword(password);
             validator.setConfirmPassword(confirmPassword);
             validator.setFirstName(firstName);
-            validator.setSecondName(secondName);
+            validator.setLastName(secondName);
             validator.setRegion(region);
             validator.setGender(gender);
             validator.setSubscription(subscription);
@@ -62,7 +57,7 @@ public class ProfileServlet extends HttpServlet {
             if (validator.getValidWitoutEmail()) {
                 user.setPassword(MD5Util.md5Apache(password));
                 user.setFirstName(firstName);
-                user.setSecondName(secondName);
+                user.setLastName(secondName);
                 user.setRegion(region);
                 user.setGender(Gender.valueOf(gender));
                 user.setSubscription(subscription);
@@ -82,6 +77,7 @@ public class ProfileServlet extends HttpServlet {
             }
         }
 
+        */
         String forwardURL = "/profile.jsp";
         log.info("forward : " + forwardURL);
         request.getRequestDispatcher(forwardURL).forward(request, response);

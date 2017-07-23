@@ -1,263 +1,350 @@
 package ua.itea.validator;
 
 import org.apache.commons.lang3.StringUtils;
-import ua.itea.Checker.Checker;
+import org.joda.time.DateTime;
 import ua.itea.dao.UserDAO;
 import ua.itea.entity.Gender;
+import ua.itea.hecker.Checker;
 
-/**
- * Created by dada.mazza on 01.07.2017.
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class Validator {
+
+    private UserDAO userDAO = new UserDAO();
 
     private String email;
     private String password;
     private String confirmPassword;
     private String firstName;
-    private String secondName;
-    private String region;
+    private String lastName;
+    private String yearOfBirth;
+    private String monthOfBirth;
+    private String dayOfBirth;
     private String gender;
-    private boolean subscription;
+    private String address;
+    private String city;
+    private String phoneNumber;
+    private String additionalInformation;
 
-    private String emailErrorMessage;
-    private String passwordErrorMessage;
-    private String firstNameErrorMessage;
-    private String secondNameErrorMessage;
-    private String regionErrorMessage;
-    private String genderErrorMessage;
 
-    private boolean valid;
-    private boolean validWitoutEmail;
+    private List<String> emailErrorMessages;
+    private List<String> passwordErrorMessages;
+    private List<String> confirmPasswordErrorMessages;
+    private List<String> firstNameErrorMessages;
+    private List<String> lastNameErrorMessages;
+    private List<String> yearOfBirthErrorMessages;
+    private List<String> monthOfBirthErrorMessages;
+    private List<String> dayOfBirthErrorMessages;
+    private List<String> dateOfBirthErrorMessages;
+    private List<String> genderErrorMessages;
+    private List<String> addressErrorMessages;
+    private List<String> cityErrorMessages;
+    private List<String> phoneNumberErrorMessages;
+    private List<String> additionalInformationErrorMessages;
 
-    Checker checker = new Checker();
+    public Validator() {
+    }
 
-    public String getEmail() {
-        return email;
+    public Validator(String email, String password, String confirmPassword, String firstName, String lastName, String yearOfBirth, String monthOfBirth, String dayOfBirth, String gender, String address, String city, String additionalInformation, String phoneNumber) {
+        this.email = email;
+        this.password = password;
+        this.confirmPassword = confirmPassword;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.yearOfBirth = yearOfBirth;
+        this.monthOfBirth = monthOfBirth;
+        this.dayOfBirth = dayOfBirth;
+        this.gender = gender;
+        this.address = address;
+        this.city = city;
+        this.additionalInformation = additionalInformation;
+        this.phoneNumber = phoneNumber;
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public String getConfirmPassword() {
-        return confirmPassword;
     }
 
     public void setConfirmPassword(String confirmPassword) {
         this.confirmPassword = confirmPassword;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    public String getSecondName() {
-        return secondName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public void setSecondName(String secondName) {
-        this.secondName = secondName;
+    public void setYearOfBirth(String yearOfBirth) {
+        this.yearOfBirth = yearOfBirth;
     }
 
-    public String getRegion() {
-        return region;
+    public void setMonthOfBirth(String monthOfBirth) {
+        this.monthOfBirth = monthOfBirth;
     }
 
-    public void setRegion(String region) {
-        this.region = region;
-    }
-
-    public String getGender() {
-        return gender;
+    public void setDayOfBirth(String dayOfBirth) {
+        this.dayOfBirth = dayOfBirth;
     }
 
     public void setGender(String gender) {
         this.gender = gender;
     }
 
-    public boolean isSubscription() {
-        return subscription;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public void setSubscription(boolean subscription) {
-        this.subscription = subscription;
+    public void setCity(String city) {
+        this.city = city;
     }
 
-    public String getEmailErrorMessage() {
-        emailErrorMessage = "";
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setAdditionalInformation(String additionalInformation) {
+        this.additionalInformation = additionalInformation;
+    }
+
+
+    public List<String> getEmailErrorMessages() {
+        emailErrorMessages = new ArrayList<>();
 
         if (StringUtils.isBlank(email)) {
-            emailErrorMessage += "<li>Email Address can't be empty</li>";
+            emailErrorMessages.add("Email Address can't be empty");
         }
 
-        if (!checker.isEmail(email)) {
-            emailErrorMessage += "<li>Email Address is not valid</li>";
+        if (!Checker.isEmail(email)) {
+            emailErrorMessages.add("Email Address is not valid");
         }
 
-        if (new UserDAO().getEntityByEmail(email) != null) {
-            emailErrorMessage += "<li>Email Address is busy</li>";
+        if (userDAO.getEntityByEmail(email) != null) {
+            emailErrorMessages.add("Email Address is busy");
         }
 
-        if (!StringUtils.isBlank(emailErrorMessage)) {
-            emailErrorMessage = "<ul class='error'>" + emailErrorMessage + "</ul>";
-        }
-
-        return emailErrorMessage;
+        return emailErrorMessages;
     }
 
-    public void setEmailErrorMessage(String emailErrorMessage) {
-        this.emailErrorMessage = emailErrorMessage;
-    }
-
-    public String getPasswordErrorMessage() {
-        passwordErrorMessage = "";
+    public List<String> getPasswordErrorMessages() {
+        passwordErrorMessages = new ArrayList<>();
 
         if (StringUtils.isBlank(password)) {
-            passwordErrorMessage += "<li>Password can't be empty</li>";
+            passwordErrorMessages.add("Password can't be empty");
         }
 
         if (password.length() < 4) {
-            passwordErrorMessage += "<li>Password must be at least 4 characters long</li>";
+            passwordErrorMessages.add("Password must be at least 4 characters long");
         }
 
         if (password.length() > 20) {
-            passwordErrorMessage += "<li>Password must contain no more than 20 characters</li>";
+            passwordErrorMessages.add("Password must contain no more than 20 characters");
         }
 
-        if (!checker.hasDigit(password)) {
-            passwordErrorMessage += "<li>Password must contain digits</li>";
+        if (!Checker.hasDigit(password)) {
+            passwordErrorMessages.add("Password must contain digits");
         }
 
-        if (!checker.hasUpperCase(password)) {
-            passwordErrorMessage += "<li>Password must contain uppercase characters</li>";
+        if (!Checker.hasUpperCase(password)) {
+            passwordErrorMessages.add("Password must contain uppercase characters");
         }
 
-        if (!checker.hasLowerCase(password)) {
-            passwordErrorMessage += "<li>Password must contain lowercase characters</li>";
+        if (!Checker.hasLowerCase(password)) {
+            passwordErrorMessages.add("Password must contain lowercase characters");
         }
+
+        return passwordErrorMessages;
+    }
+
+    public List<String> getConfirmPasswordErrorMessages() {
+        confirmPasswordErrorMessages = new ArrayList<>();
 
         if (!password.equals(confirmPassword)) {
-            passwordErrorMessage += "<li>Password confirmation must match the password</li>";
+            confirmPasswordErrorMessages.add("Password confirmation must match the password");
         }
 
-        if (!StringUtils.isBlank(passwordErrorMessage)) {
-            passwordErrorMessage = "<ul class='error'>" + passwordErrorMessage + "</ul>";
-        }
-        return passwordErrorMessage;
+        return confirmPasswordErrorMessages;
     }
 
-    public void setPasswordErrorMessage(String passwordErrorMessage) {
-        this.passwordErrorMessage = passwordErrorMessage;
-    }
-
-    public String getFirstNameErrorMessage() {
-        firstNameErrorMessage = "";
+    public List<String> getFirstNameErrorMessages() {
+        firstNameErrorMessages = new ArrayList<>();
 
         if (StringUtils.isBlank(firstName)) {
-            firstNameErrorMessage += "<li>First Name can't be empty</li>";
+            firstNameErrorMessages.add("First Name can't be empty");
         }
 
         if (firstName.length() < 3) {
-            firstNameErrorMessage += "<li>First Name must be at least 3 characters long</li>";
+            firstNameErrorMessages.add("First Name must be at least 3 characters long");
         }
 
-        if (!StringUtils.isBlank(firstNameErrorMessage)) {
-            firstNameErrorMessage = "<ul class='error'>" + firstNameErrorMessage + "</ul>";
-        }
-        return firstNameErrorMessage;
+        return firstNameErrorMessages;
     }
 
-    public void setFirstNameErrorMessage(String firstNameErrorMessage) {
-        this.firstNameErrorMessage = firstNameErrorMessage;
-    }
+    public List<String> getLastNameErrorMessages() {
+        lastNameErrorMessages = new ArrayList<>();
 
-    public String getSecondNameErrorMessage() {
-        secondNameErrorMessage = "";
-
-        if (StringUtils.isBlank(secondName)) {
-            secondNameErrorMessage += "<li>Second Name can't be empty</li>";
+        if (StringUtils.isBlank(lastName)) {
+            lastNameErrorMessages.add("Second Name can't be empty");
         }
 
-        if (secondName.length() < 3) {
-            secondNameErrorMessage += "<li>Second Name must be at least 3 characters long</li>";
+        if (lastName.length() < 3) {
+            lastNameErrorMessages.add("Second Name must be at least 3 characters long");
         }
 
-        if (!StringUtils.isBlank(secondNameErrorMessage)) {
-            secondNameErrorMessage = "<ul class='error'>" + secondNameErrorMessage + "</ul>";
+        return lastNameErrorMessages;
+    }
+
+    public List<String> getYearOfBirthErrorMessages() {
+        yearOfBirthErrorMessages = new ArrayList<>();
+
+        if (StringUtils.isBlank(yearOfBirth)) {
+            yearOfBirthErrorMessages.add("Year can't be empty");
+        } else if (!Checker.isDigit(yearOfBirth)) {
+            yearOfBirthErrorMessages.add("Year must be a number");
+        } else {
+            Integer year = Integer.parseInt(this.yearOfBirth);
+            Integer currentYear = new DateTime().getYear();
+            if (year < (currentYear - 100)) {
+                yearOfBirthErrorMessages.add("Year can not be less than " + (currentYear - 100));
+            }
+
+            if (year >= (currentYear - 3)) {
+                yearOfBirthErrorMessages.add("Year can not be more than " + +(currentYear - 3));
+            }
         }
-        return secondNameErrorMessage;
+
+        return yearOfBirthErrorMessages;
     }
 
-    public void setSecondNameErrorMessage(String secondNameErrorMessage) {
-        this.secondNameErrorMessage = secondNameErrorMessage;
+    public List<String> getMonthOfBirthErrorMessages() {
+        monthOfBirthErrorMessages = new ArrayList<>();
+
+        if (StringUtils.isBlank(monthOfBirth)) {
+            monthOfBirthErrorMessages.add("Month can't be empty");
+        } else if (!Checker.isDigit(monthOfBirth)) {
+            monthOfBirthErrorMessages.add("Month must be a number");
+        } else {
+            Integer month = Integer.parseInt(this.monthOfBirth);
+            if (month < 1) {
+                monthOfBirthErrorMessages.add("Month can not be less than 1");
+            }
+
+            if (month > 12) {
+                monthOfBirthErrorMessages.add("Month can not be more than 12");
+            }
+        }
+        return monthOfBirthErrorMessages;
     }
 
-    public String getRegionErrorMessage() {
-        regionErrorMessage = "";
+    public List<String> getDayOfBirthErrorMessages() {
+        dayOfBirthErrorMessages = new ArrayList<>();
 
-        if (StringUtils.isBlank(region)) {
-            regionErrorMessage += "<li>Region can't be empty</li>";
+        if (StringUtils.isBlank(dayOfBirth)) {
+            dateOfBirthErrorMessages.add("Day can't be empty");
+        } else if (!Checker.isDigit(dayOfBirth)) {
+            dateOfBirthErrorMessages.add("Day must be a number");
+        } else if ((yearOfBirthErrorMessages != null && yearOfBirthErrorMessages.isEmpty())
+                && (monthOfBirthErrorMessages != null && monthOfBirthErrorMessages.isEmpty())) {
+            Integer day = Integer.parseInt(this.dayOfBirth);
+            if (day < 1) {
+                dateOfBirthErrorMessages.add("Day can not be less than 1");
+            }
+            Integer year = Integer.parseInt(this.yearOfBirth);
+            Integer month = Integer.parseInt(this.monthOfBirth);
+            DateTime dateTime = new DateTime(year, month, 1, 1, 1);
+            if (day > dateTime.dayOfMonth().getMaximumValue()) {
+                dateOfBirthErrorMessages.add("Day can not be more than " + dateTime.dayOfMonth().getMaximumValue());
+            }
         }
 
-        if (!StringUtils.isBlank(regionErrorMessage)) {
-            regionErrorMessage = "<ul class='error'>" + regionErrorMessage + "</ul>";
-        }
-        return regionErrorMessage;
+        return monthOfBirthErrorMessages;
     }
 
-    public void setRegionErrorMessage(String regionErrorMessage) {
-        this.regionErrorMessage = regionErrorMessage;
+    public List<String> getDateOfBirthErrorMessages() {
+        dateOfBirthErrorMessages = new ArrayList<>();
+        dateOfBirthErrorMessages.addAll(getYearOfBirthErrorMessages());
+        dateOfBirthErrorMessages.addAll(getMonthOfBirthErrorMessages());
+        dateOfBirthErrorMessages.addAll(getDayOfBirthErrorMessages());
+        return dateOfBirthErrorMessages;
     }
 
-    public String getGenderErrorMessage() {
-        regionErrorMessage = "";
+    public List<String> getGenderErrorMessages() {
+        genderErrorMessages = new ArrayList<>();
 
         if (StringUtils.isBlank(gender)) {
-            regionErrorMessage += "<li>Gender can't be empty</li>";
+            genderErrorMessages.add("Gender can't be empty");
         }
 
-        if (!gender.equals(Gender.Male.name()) || !gender.equals(Gender.Male.name())) {
-            regionErrorMessage += "<li>Invalid gender value</li>";
+        if (!gender.equals(Gender.Male.name()) && !gender.equals(Gender.Female.name())) {
+            genderErrorMessages.add("Gender must be Male or Female");
+        }
+        return genderErrorMessages;
+    }
+
+    public List<String> getAddressErrorMessages() {
+        addressErrorMessages = new ArrayList<>();
+
+        if (StringUtils.isBlank(address)) {
+            addressErrorMessages.add("Address can't be empty");
         }
 
-        if (!StringUtils.isBlank(regionErrorMessage)) {
-            regionErrorMessage = "<ul class='error'>" + regionErrorMessage + "</ul>";
+        return addressErrorMessages;
+    }
+
+    public List<String> getCityErrorMessages() {
+        cityErrorMessages = new ArrayList<>();
+
+        if (StringUtils.isBlank(city)) {
+            cityErrorMessages.add("City can't be empty");
         }
-        return genderErrorMessage;
+
+        return cityErrorMessages;
     }
 
-    public void setGenderErrorMessage(String genderErrorMessage) {
-        this.genderErrorMessage = genderErrorMessage;
+    public List<String> getPhoneNumberErrorMessages() {
+        phoneNumberErrorMessages = new ArrayList<>();
+
+        if (!Checker.isPhoneNumber(phoneNumber)) {
+            phoneNumberErrorMessages.add("Phone Number is not valid");
+        }
+
+        return phoneNumberErrorMessages;
     }
 
-    public boolean getValid() {
-        valid = StringUtils.isBlank(getEmailErrorMessage())
-                && StringUtils.isBlank(getPasswordErrorMessage())
-                && StringUtils.isBlank(getFirstNameErrorMessage())
-                && StringUtils.isBlank(getSecondNameErrorMessage())
-                && StringUtils.isBlank(getRegionErrorMessage())
-                && StringUtils.isBlank(getGenderErrorMessage());
-        return valid;
+    public List<String> getAdditionalInformationErrorMessages() {
+        additionalInformationErrorMessages = new ArrayList<>();
+
+        if (additionalInformation == null) {
+            additionalInformationErrorMessages.add("Additional Information can't be null");
+        }
+
+        return additionalInformationErrorMessages;
     }
 
-    public boolean getValidWitoutEmail() {
-        validWitoutEmail = StringUtils.isBlank(getPasswordErrorMessage())
-                && StringUtils.isBlank(getFirstNameErrorMessage())
-                && StringUtils.isBlank(getSecondNameErrorMessage())
-                && StringUtils.isBlank(getRegionErrorMessage())
-                && StringUtils.isBlank(getGenderErrorMessage());
-        return validWitoutEmail;
+    // =================================================================================================================
+
+    public boolean isValidEmail() {
+        return getEmailErrorMessages().isEmpty();
+    }
+
+    public boolean isValid() {
+        return getEmailErrorMessages().isEmpty()
+                && getPasswordErrorMessages().isEmpty()
+                && getConfirmPasswordErrorMessages().isEmpty()
+                && getFirstNameErrorMessages().isEmpty()
+                && getLastNameErrorMessages().isEmpty()
+                && getDateOfBirthErrorMessages().isEmpty()
+                && getGenderErrorMessages().isEmpty()
+                && getAddressErrorMessages().isEmpty()
+                && getCityErrorMessages().isEmpty()
+                && getPhoneNumberErrorMessages().isEmpty()
+                && getAdditionalInformationErrorMessages().isEmpty();
     }
 }
