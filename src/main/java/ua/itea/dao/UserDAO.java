@@ -142,7 +142,7 @@ public class UserDAO extends AbstractDAO<User> {
         return false;
     }
 
-    private User getEntity(String sql) {
+    private User getEntityFromExecuteQuery(String sql) {
         try {
             ResultSet resultSet = getResultSet(sql);
             if (resultSet == null) {
@@ -167,7 +167,7 @@ public class UserDAO extends AbstractDAO<User> {
                 " id = '" + id + "'" +
                 ";";
         log.info(sql);
-        return getEntity(sql);
+        return getEntityFromExecuteQuery(sql);
     }
 
     public User getEntityByEmail(String email) {
@@ -177,7 +177,7 @@ public class UserDAO extends AbstractDAO<User> {
                 " email = '" + email + "'" +
                 ";";
         log.info(sql);
-        return getEntity(sql);
+        return getEntityFromExecuteQuery(sql);
     }
 
     @Override

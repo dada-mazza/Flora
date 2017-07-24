@@ -1,6 +1,7 @@
 package ua.itea.dao;
 
 import ua.itea.entity.Category;
+import ua.itea.entity.SubCategory;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,19 +20,24 @@ public class CategoryDAO extends AbstractDAO<Category> {
     protected Category convertResultSetToEntity(ResultSet resultSet) throws SQLException {
         Category category = new Category();
         category.setId(resultSet.getLong("id"));
-        category.setName(resultSet.getString("name"));
+        category.setUkrName(resultSet.getString("ukr_name"));
+        category.setEngName(resultSet.getString("eng_name"));
+        List<SubCategory> subCategories = new SubCategoryDAO().getAllByCategory(category);
+        category.setSubCategories(subCategories);
+
         return category;
     }
 
     @Override
     public Long create(Category category) {
         String sql = "INSERT INTO " + NAME_TABLE
-                + " (name)"
-                + " VALUES (?)";
+                + " (ukr_name, eng_name)"
+                + " VALUES (?, ?)";
         log.info(sql);
         try {
             PreparedStatement statement = getPreparedStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, category.getName());
+            statement.setString(1, category.getUkrName());
+            statement.setString(2, category.getEngName());
 
             if (statement.executeUpdate() == 0) {
                 throw new SQLException("Creating Category failed, no rows affected.");
@@ -74,14 +80,17 @@ public class CategoryDAO extends AbstractDAO<Category> {
     @Override
     public boolean update(Category category) {
         String sql = "UPDATE " + NAME_TABLE + " "
-                + " SET name=?"
+                + " SET"
+                + " ukr_name=?"
+                + " eng_name=?"
                 + " WHERE"
                 + " id = " + category.getId();
         log.info(sql);
         log.info(category);
         try {
             PreparedStatement statement = getPreparedStatement(sql);
-            statement.setString(1, category.getName());
+            statement.setString(1, category.getUkrName());
+            statement.setString(2, category.getEngName());
 
             if (statement.executeUpdate() == 0) {
                 throw new SQLException("Updating Category failed, no rows affected.");
@@ -95,7 +104,14 @@ public class CategoryDAO extends AbstractDAO<Category> {
         return false;
     }
 
-    private Category getEntity(String sql) {
+    @Override
+    public Category getEntityById(Long id) {
+        String sql = "SELECT *" +
+                " FROM " + NAME_TABLE +
+                " WHERE" +
+                " id = '" + id + "'" +
+                ";";
+        log.info(sql);
         try {
             ResultSet resultSet = getResultSet(sql);
             if (resultSet == null) {
@@ -110,17 +126,6 @@ public class CategoryDAO extends AbstractDAO<Category> {
             connectionClose();
         }
         return null;
-    }
-
-    @Override
-    public Category getEntityById(Long id) {
-        String sql = "SELECT *" +
-                " FROM " + NAME_TABLE +
-                " WHERE" +
-                " id = '" + id + "'" +
-                ";";
-        log.info(sql);
-        return getEntity(sql);
     }
 
     @Override

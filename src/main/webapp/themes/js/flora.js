@@ -1,5 +1,5 @@
-$(document).ready(function () {
-    /* carousel of home page animation */
+/* carousel of home page animation */
+$(function () {
     $('#myCarousel').carousel({
         interval: 4000
     })
@@ -9,6 +9,11 @@ $(document).ready(function () {
     $(function () {
         $('#gallery a').lightBox();
     });
+})
+
+/* sidebar */
+$(function () {
+
 
     $('.subMenu > a').click(function (e) {
         e.preventDefault();
@@ -35,7 +40,10 @@ $(document).ready(function () {
             li.addClass('open');
         }
     });
+
+
     var ul = $('#sidebar > ul');
+
     $('#sidebar > a').click(function (e) {
         e.preventDefault();
         var sidebar = $('#sidebar');
@@ -47,5 +55,6 @@ $(document).ready(function () {
             ul.slideDown(250);
         }
     });
+
 
 });

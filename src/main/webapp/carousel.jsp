@@ -7,7 +7,7 @@
             <div class="item active">
                 <div class="container">
                     <a href="special_offer.jsp">
-                        <img style="width:100%" src="themes/images/example/carousel/1.png" alt="special offers"/>
+                        <img style="width:100%" src="themes/images/carousel/001.png" alt="special offers"/>
                     </a>
                     <div class="carousel-caption">
                         <h4>Second Thumbnail label</h4>
@@ -19,7 +19,19 @@
             <div class="item">
                 <div class="container">
                     <a href="special_offer.jsp">
-                        <img style="width:100%" src="themes/images/example/carousel/2.png" alt=""/>
+                        <img style="width:100%" src="themes/images/carousel/002.png" alt=""/>
+                    </a>
+                    <div class="carousel-caption">
+                        <h4>Second Thumbnail label</h4>
+                        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta
+                            gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="container">
+                    <a href="special_offer.jsp">
+                        <img style="width:100%" src="themes/images/carousel/003.png" alt=""/>
                     </a>
                     <div class="carousel-caption">
                         <h4>Second Thumbnail label</h4>

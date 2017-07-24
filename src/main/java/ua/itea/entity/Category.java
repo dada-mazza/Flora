@@ -1,19 +1,22 @@
 package ua.itea.entity;
 
-/**
- * Created by dada.mazza on 16.07.2017.
- */
+import java.util.List;
+
 public class Category {
 
     private Long id;
-    private String name;
+    private String ukrName;
+    private String engName;
+    private List<SubCategory> subCategories;
 
     public Category() {
     }
 
-    public Category(Long id, String name) {
+    public Category(Long id, String ukrName, String engName, List<SubCategory> subCategories) {
         this.id = id;
-        this.name = name;
+        this.ukrName = ukrName;
+        this.engName = engName;
+        this.subCategories = subCategories;
     }
 
     public Long getId() {
@@ -24,19 +27,37 @@ public class Category {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUkrName() {
+        return ukrName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUkrName(String ukrName) {
+        this.ukrName = ukrName;
+    }
+
+    public String getEngName() {
+        return engName;
+    }
+
+    public void setEngName(String engName) {
+        this.engName = engName;
+    }
+
+    public List<SubCategory> getSubCategories() {
+        return subCategories;
+    }
+
+    public void setSubCategories(List<SubCategory> subCategories) {
+        this.subCategories = subCategories;
     }
 
     @Override
     public String toString() {
         return "Category{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", ukrName='" + ukrName + '\'' +
+                ", engName='" + engName + '\'' +
+                ", subCategories=" + subCategories +
                 '}';
     }
 }
