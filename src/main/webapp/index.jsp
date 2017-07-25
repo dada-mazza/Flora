@@ -9,7 +9,9 @@
     <div class="container">
         <div class="row">
 
+
             <%@include file="sidebar.jsp" %>
+
 
             <%@include file="products.jsp" %>
 
