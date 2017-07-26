@@ -32,8 +32,8 @@
             <div class="span6">
                 <div class="pull-right">
                     <span class="btn btn-mini">999,99</span>
-                    <a href="product_summary.jsp"><span class="">&#8372</span></a>
-                    <a href="product_summary.jsp">
+                    <a href="product_summary."><span class="">&#8372</span></a>
+                    <a href="product_summary">
                         <span class="btn btn-mini btn-primary">
                             <i class="icon-shopping-cart icon-white"></i> [ 999 ] Itemes in your cart
                         </span>
@@ -63,9 +63,9 @@
                     <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                 </form>
                 <ul id="topMenu" class="nav pull-right">
-                    <li class=""><a href="special_offer.jsp">Specials Offer</a></li>
-                    <li class=""><a href="normal.jsp">Delivery</a></li>
-                    <li class=""><a href="contact.jsp">Contact</a></li>
+                    <li class=""><a href="special_offer">Specials Offer</a></li>
+                    <li class=""><a href="normal">Delivery</a></li>
+                    <li class=""><a href="contact">Contact</a></li>
 
                     <!-- Login ==================================================================================== -->
                     <c:if test="${empty userEntity}">

@@ -6,25 +6,25 @@
         <div class="row">
             <div class="span3">
                 <h5>ACCOUNT</h5>
-                <a href="login">YOUR ACCOUNT</a>
-                <a href="login">PERSONAL INFORMATION</a>
-                <a href="login">ADDRESSES</a>
-                <a href="login">DISCOUNT</a>
-                <a href="login.jsp">ORDER HISTORY</a>
+                <a href="/login.html">YOUR ACCOUNT</a>
+                <a href="/login.html">PERSONAL INFORMATION</a>
+                <a href="/login.html">ADDRESSES</a>
+                <a href="/login.html">DISCOUNT</a>
+                <a href="/login.html">ORDER HISTORY</a>
             </div>
             <div class="span3">
                 <h5>INFORMATION</h5>
-                <a href="contact.jsp">CONTACT</a>
-                <a href="register.jsp">REGISTRATION</a>
-                <a href="legal_notice.jsp">LEGAL NOTICE</a>
-                <a href="tac.jsp">TERMS AND CONDITIONS</a>
-                <a href="faq.jsp">FAQ</a>
+                <a href="contact">CONTACT</a>
+                <a href="register">REGISTRATION</a>
+                <a href="legal_notice">LEGAL NOTICE</a>
+                <a href="tac">TERMS AND CONDITIONS</a>
+                <a href="faq">FAQ</a>
             </div>
             <div class="span3">
                 <h5>OUR OFFERS</h5>
                 <a href="#">NEW PRODUCTS</a>
                 <a href="#">TOP SELLERS</a>
-                <a href="special_offer.jsp">SPECIAL OFFERS</a>
+                <a href="special_offer">SPECIAL OFFERS</a>
                 <a href="#">MANUFACTURERS</a>
                 <a href="#">SUPPLIERS</a>
             </div>
