@@ -4,7 +4,7 @@ package ua.itea.controller;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import ua.itea.dao.UserDAO;
-import ua.itea.entity.User;
+import ua.itea.entity.UserEntity;
 import ua.itea.md5.MD5Util;
 
 import javax.servlet.ServletException;
@@ -24,9 +24,9 @@ public class LoginServlet extends HttpServlet {
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        UserEntity userEntity = (UserEntity) session.getAttribute("userEntity");
 
-        if (user != null) {
+        if (userEntity != null) {
             String redirectURL = "/logout";
             log.info("redirect : " + redirectURL);
             response.sendRedirect(redirectURL);
@@ -58,13 +58,13 @@ public class LoginServlet extends HttpServlet {
             String email = request.getParameter("inputEmailLogin");
             String password = request.getParameter("inputPasswordLogin");
             String md5Password = MD5Util.md5Apache(password);
-            User user = new UserDAO().getEntityByEmail(email);
+            UserEntity userEntity = new UserDAO().getEntityByEmail(email);
 
-            if (user != null
-                    && email.equals(user.getEmail())
-                    && md5Password.equals(user.getPassword())) {
+            if (userEntity != null
+                    && email.equals(userEntity.getEmail())
+                    && md5Password.equals(userEntity.getPassword())) {
                 log.info("access granted for " + email);
-                session.setAttribute("user", user);
+                session.setAttribute("user", userEntity);
                 String redirectURL = "/";
                 log.info("redirect : " + redirectURL);
                 response.sendRedirect(redirectURL);

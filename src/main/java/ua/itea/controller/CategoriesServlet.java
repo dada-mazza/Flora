@@ -4,7 +4,7 @@ package ua.itea.controller;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import ua.itea.dao.CategoryDAO;
-import ua.itea.entity.Category;
+import ua.itea.entity.CategoryEntity;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +22,10 @@ public class CategoriesServlet extends HttpServlet {
     @Override
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nameAttribute = "categories";
-        List<Category> categories = new CategoryDAO().getAll();
+        List<CategoryEntity> categories = new CategoryDAO().getAll();
         request.setAttribute(nameAttribute, categories);
+        String includeURL = "sidebar.jsp";
+        log.info("include : " + includeURL);
+        request.getRequestDispatcher(includeURL).include(request, response);
     }
 }

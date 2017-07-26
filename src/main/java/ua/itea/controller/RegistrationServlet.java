@@ -5,8 +5,8 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.joda.time.DateTime;
 import ua.itea.dao.UserDAO;
-import ua.itea.entity.Gender;
-import ua.itea.entity.User;
+import ua.itea.entity.UserEntity;
+import ua.itea.entity.enumeratiom.Gender;
 import ua.itea.md5.MD5Util;
 import ua.itea.validator.Validator;
 
@@ -27,9 +27,9 @@ public class RegistrationServlet extends HttpServlet {
     public void service(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        UserEntity userEntity = (UserEntity) session.getAttribute("userEntity");
 
-        if (user != null) {
+        if (userEntity != null) {
             String redirectURL = "/profile";
             log.info("redirect : " + redirectURL);
             response.sendRedirect(redirectURL);
@@ -106,27 +106,27 @@ public class RegistrationServlet extends HttpServlet {
             validator.setAdditionalInformation(additionalInformation);
 
             if (validator.isValid()) {
-                User user = new User();
-                user.setEmail(email);
-                user.setPassword(MD5Util.md5Apache(password));
-                user.setFirstName(firstName);
-                user.setLastName(lastName);
-                user.setDateOfBirth(new DateTime(
+                UserEntity userEntity = new UserEntity();
+                userEntity.setEmail(email);
+                userEntity.setPassword(MD5Util.md5Apache(password));
+                userEntity.setFirstName(firstName);
+                userEntity.setLastName(lastName);
+                userEntity.setDateOfBirth(new DateTime(
                         Integer.parseInt(yearOfBirth),
                         Integer.parseInt(monthOfBirth),
                         Integer.parseInt(dayOfBirth),
                         0, 0));
-                user.setGender(Gender.valueOf(gender));
-                user.setAddress(address);
-                user.setCity(city);
-                user.setPhoneNumber(phoneNumber);
-                user.setAdditionalInformation(additionalInformation);
+                userEntity.setGender(Gender.valueOf(gender));
+                userEntity.setAddress(address);
+                userEntity.setCity(city);
+                userEntity.setPhoneNumber(phoneNumber);
+                userEntity.setAdditionalInformation(additionalInformation);
 
-                user.setId(new UserDAO().create(user));
+                userEntity.setId(new UserDAO().create(userEntity));
 
-                if (user.getId() != null) {
-                    log.info("User has bean registered : " + email);
-                    session.setAttribute("user", user);
+                if (userEntity.getId() != null) {
+                    log.info("UserEntity has bean registered : " + email);
+                    session.setAttribute("user", userEntity);
                     String redirectURL = "/";
                     log.info("redirect : " + redirectURL);
                     response.sendRedirect(redirectURL);
@@ -137,7 +137,7 @@ public class RegistrationServlet extends HttpServlet {
                 }
 
             } else {
-                log.info("User has not bean registered : " + email);
+                log.info("UserEntity has not bean registered : " + email);
                 request.setAttribute("validator", validator);
                 String forwardURL = "/registration.jsp";
                 log.info("forward : " + forwardURL);

@@ -3,7 +3,7 @@ package ua.itea.controller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import ua.itea.entity.User;
+import ua.itea.entity.UserEntity;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,9 +25,9 @@ public class ProfileServlet extends HttpServlet {
         log.info("method : " + request.getMethod());
 
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("user");
+        UserEntity userEntity = (UserEntity) session.getAttribute("userEntity");
 
-        if (user == null) {
+        if (userEntity == null) {
             String redirectURL = "/registration";
             log.info("redirect : " + redirectURL);
             response.sendRedirect(redirectURL);
@@ -55,21 +55,21 @@ public class ProfileServlet extends HttpServlet {
             validator.setSubscription(subscription);
 
             if (validator.getValidWitoutEmail()) {
-                user.setPassword(MD5Util.md5Apache(password));
-                user.setFirstName(firstName);
-                user.setLastName(secondName);
-                user.setRegion(region);
-                user.setGender(Gender.valueOf(gender));
-                user.setSubscription(subscription);
+                userEntity.setPassword(MD5Util.md5Apache(password));
+                userEntity.setFirstName(firstName);
+                userEntity.setLastName(secondName);
+                userEntity.setRegion(region);
+                userEntity.setGender(Gender.valueOf(gender));
+                userEntity.setSubscription(subscription);
 
-                if (new UserDAO().update(user)) {
-                    log.info("Updated for " + user.getEmail());
+                if (new UserDAO().update(userEntity)) {
+                    log.info("Updated for " + userEntity.getEmail());
                     String redirectURL = "/products";
                     log.info("redirect : " + redirectURL);
                     response.sendRedirect(redirectURL);
                     return;
                 } else {
-                    log.info("update error for " + user.getEmail());
+                    log.info("update error for " + userEntity.getEmail());
                     request.setAttribute("errorMessage", "Update error. Try later!");
                 }
             } else {
