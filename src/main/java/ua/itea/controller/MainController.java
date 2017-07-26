@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@Controller()
+@Controller
 @RequestMapping("/")
 public class MainController {
 
@@ -15,8 +15,8 @@ public class MainController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String service() {
-        String forwardURL = "index";
-        log.info("forward : " + forwardURL);
-        return "index";
+        String url = "main";
+        log.info("url -> " + url);
+        return url;
     }
 }
