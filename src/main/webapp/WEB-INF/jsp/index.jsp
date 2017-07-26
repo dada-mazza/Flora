@@ -9,11 +9,8 @@
     <div class="container">
         <div class="row">
 
-
-            <%@include file="sidebar.jsp" %>
-
-
-            <%@include file="products.jsp" %>
+            <%--   <jsp:include page="/categories"/> --%>
+            <jsp:include page="products.jsp"/>
 
         </div>
     </div>

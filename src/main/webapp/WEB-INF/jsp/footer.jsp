@@ -32,15 +32,15 @@
                 <h5>SOCIAL MEDIA </h5>
                 <a href="#">
                     <img width="60" height="60"
-                         src="themes/images/social/facebook.png" title="facebook" alt="facebook"/>
+                         src="../../themes/images/social/facebook.png" title="facebook" alt="facebook"/>
                 </a>
                 <a href="#">
                     <img width="60" height="60"
-                         src="themes/images/social/twitter.png" title="twitter" alt="twitter"/>
+                         src="../../themes/images/social/twitter.png" title="twitter" alt="twitter"/>
                 </a>
                 <a href="#">
                     <img width="60" height="60"
-                         src="themes/images/social/youtube.png" title="youtube" alt="youtube"/>
+                         src="../../themes/images/social/youtube.png" title="youtube" alt="youtube"/>
                 </a>
             </div>
         </div>
@@ -48,10 +48,10 @@
     </div><!-- Container End -->
 </div>
 <!-- Placed at the end of the document so the pages load faster ==================================================== -->
-<script src="themes/js/jquery.js" type="text/javascript"></script>
-<script src="themes/js/bootstrap.js" type="text/javascript"></script>
-<script src="themes/js/flora.js" type="text/javascript"></script>
-<script src="themes/js/jquery.lightbox-0.5.js" type="text/javascript"></script>
+<script src="../../themes/js/jquery.js" type="text/javascript"></script>
+<script src="../../themes/js/bootstrap.js" type="text/javascript"></script>
+<script src="../../themes/js/flora.js" type="text/javascript"></script>
+<script src="../../themes/js/jquery.lightbox-0.5.js" type="text/javascript"></script>
 
 </body>
 </html>

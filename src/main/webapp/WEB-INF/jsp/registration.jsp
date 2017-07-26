@@ -10,7 +10,7 @@
         <div class="row">
 
             <!-- Sidebar =========================================================================================== -->
-            <%@include file="sidebar.jsp" %>
+            <jsp:include page="/categories"/>
             <!-- Sidebar end ======================================================================================= -->
 
             <div class="span9">
@@ -356,4 +356,4 @@
 <!-- Footer ======================================================================================================== -->
 <%@include file="footer.jsp" %>
 
-<script src="themes/js/registration.js" type="text/javascript"></script>
+<script src="../../themes/js/registration.js" type="text/javascript"></script>
