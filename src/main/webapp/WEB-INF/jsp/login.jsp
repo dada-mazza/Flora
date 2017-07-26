@@ -46,7 +46,7 @@
                         <div class="well">
                             <h5>CREATE YOUR ACCOUNT</h5><br/>
                             Enter your e-mail address to create an account.<br/><br/><br/>
-                            <form action="/registration" method="post">
+                            <form action="/registration/email" method="post">
                                 <div class="control-group">
                                     <label class="control-label" for="inputEmailRegistration">E-mail address</label>
                                     <div class="controls">

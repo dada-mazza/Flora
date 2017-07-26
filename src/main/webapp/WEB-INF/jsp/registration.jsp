@@ -15,7 +15,7 @@
 
             <div class="span9">
                 <ul class="breadcrumb">
-                    <li><a href="index.html">Home</a> <span class="divider">/</span></li>
+                    <li><a href="/">Home</a> <span class="divider">/</span></li>
                     <li class="active">Registration</li>
                 </ul>
                 <h3> Registration</h3>
@@ -270,7 +270,7 @@
 
                         <%-- City --%>
                         <div class="control-group">
-                            <label class="control-label" for="inputCity">Phone <sup>*</sup></label>
+                            <label class="control-label" for="inputCity">City <sup>*</sup></label>
                             <div class="controls">
                                 <input type="text" name="inputCity" id="inputCity" placeholder="City" required
                                        value="${param.inputCity}">
@@ -290,10 +290,10 @@
 
                         <%-- Phone --%>
                         <div class="control-group">
-                            <label class="control-label" for="inputPhone">Phone <sup>*</sup></label>
+                            <label class="control-label" for="inputPhoneNumber">Phone <sup>*</sup></label>
                             <div class="controls">
-                                <input type="text" name="inputPhone" id="inputPhone"
-                                       placeholder="Phone" required value="${param.inputPhone}">
+                                <input type="text" name="inputPhoneNumber" id="inputPhoneNumber"
+                                       placeholder="Phone" required value="${param.inputPhoneNumber}"/>
                             </div>
                         </div>
 
