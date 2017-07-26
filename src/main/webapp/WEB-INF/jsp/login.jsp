@@ -10,7 +10,7 @@
         <div class="row">
 
             <!-- Sidebar =========================================================================================== -->
-            <jsp:include page="/categories"/>
+            <%-- <jsp:include page="/categories"/> --%>
             <!-- Sidebar end ======================================================================================= -->
 
             <div class="span9">
@@ -46,7 +46,7 @@
                         <div class="well">
                             <h5>CREATE YOUR ACCOUNT</h5><br/>
                             Enter your e-mail address to create an account.<br/><br/><br/>
-                            <form action="registration" method="post">
+                            <form action="/registration" method="post">
                                 <div class="control-group">
                                     <label class="control-label" for="inputEmailRegistration">E-mail address</label>
                                     <div class="controls">
@@ -78,7 +78,7 @@
                     <div class="span4">
                         <div class="well">
                             <h5>ALREADY REGISTERED ?</h5>
-                            <form action="login" method="post">
+                            <form action="/login" method="post">
                                 <div class="control-group">
                                     <label class="control-label" for="inputEmailLogin">Email</label>
                                     <div class="controls">
