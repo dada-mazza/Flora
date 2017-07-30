@@ -15,13 +15,13 @@
                 <a> ${category.name} [{999}]</a>
                 <ul class="hide">
                     <li>
-                        <a class="active" href="products?category=${category.id}">
+                        <a class="active" href="/products/category?category=${category.id}">
                             <i class="icon-chevron-right"></i>All ({999})
                         </a>
                     </li>
                     <c:forEach var="subCategory" items="${category.subCategories}">
                         <li>
-                            <a href="products?subCategory=${subCategory.id}">
+                            <a href="/products/subCategory?category=${category.id}&subCategory=${subCategory.id}">
                                 <i class="icon-chevron-right"></i>${subCategory.name} ({999})
                             </a>
                         </li>

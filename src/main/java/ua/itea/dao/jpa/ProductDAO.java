@@ -23,13 +23,18 @@ public class ProductDAO extends AbstractDAO<ProductEntity> {
         return getAll(ProductEntity.class);
     }
 
-    public List<ProductEntity> getProductsByCategories(CategoryEntity categoryEntity) {
-        List<ProductEntity> result = getEntityManager().createNamedQuery("ProductEntity.getProductsByCategories", ProductEntity.class).getResultList();
+    public List<ProductEntity> getProductsByCategory(CategoryEntity category) {
+        List<ProductEntity> result = getEntityManager()
+                .createNamedQuery("ProductEntity.getProductsByCategory", ProductEntity.class)
+                .setParameter("category", category)
+                .getResultList();
         return result;
     }
 
-    public List<ProductEntity> getProductsBySubCategories(SubCategoryEntity subCategoryEntity) {
-        List<ProductEntity> result = getEntityManager().createNamedQuery("ProductEntity.getProductsBySubCategories", ProductEntity.class).getResultList();
+    public List<ProductEntity> getProductsBySubCategory(SubCategoryEntity subCategory) {
+        List<ProductEntity> result = getEntityManager()
+                .createNamedQuery("ProductEntity.getProductsBySubCategory", ProductEntity.class)
+                .setParameter("subCategory", subCategory).getResultList();
         return result;
     }
 }

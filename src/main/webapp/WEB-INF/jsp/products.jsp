@@ -21,7 +21,8 @@
                 </h3>
                 <hr class="soft"/>
                 <p>
-                    {Category} -> {SubCategory}
+                    ${category.name}
+                    <c:if test="${not empty subCategory}"> / ${subCategory.name}</c:if>
                 </p>
                 <hr class="soft"/>
                 <form class="form-horizontal span6">
@@ -51,7 +52,7 @@
                                 <li class="span3">
                                     <div class="thumbnail">
                                         <a href="product_details">
-                                            <img src="themes/images/products/${product.id}.png" alt="${product.name}"/>
+                                            <img src="/themes/images/products/${product.id}.png" alt="${product.name}"/>
                                         </a>
                                         <div class="caption">
                                             <h5>${product.name}</h5>
@@ -79,7 +80,7 @@
                         <c:forEach var="product" items="${products}">
                             <div class="row">
                                 <div class="span2">
-                                    <img src="themes/images/products/${product.id}.png"
+                                    <img src="/themes/images/products/${product.id}.png"
                                          alt="{product.name}"/>
                                 </div>
                                 <div class="span4">

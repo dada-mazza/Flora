@@ -11,9 +11,9 @@ import javax.persistence.*;
 @NamedQueries({
         @NamedQuery(name = "ProductEntity.getAll",
                 query = "select products from ProductEntity products"),
-        @NamedQuery(name = "ProductEntity.getProductsByCategories",
+        @NamedQuery(name = "ProductEntity.getProductsByCategory",
                 query = "select products from ProductEntity products where products.category = :category"),
-        @NamedQuery(name = "ProductEntity.getProductsBySubCategories",
+        @NamedQuery(name = "ProductEntity.getProductsBySubCategory",
                 query = "select products from ProductEntity products where products.subCategory = :subCategory")
 })
 
