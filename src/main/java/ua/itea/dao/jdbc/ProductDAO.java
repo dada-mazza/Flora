@@ -1,22 +1,16 @@
-package ua.itea.dao;
+package ua.itea.dao.jdbc;
 
-import ua.itea.entity.Product;
+import ua.itea.entity.ProductEntity;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
-public class ProductDAO extends AbstractDAO<Product> {
+public abstract class ProductDAO extends AbstractDAO<ProductEntity> {
+    /*
     private final String NAME_TABLE = "products";
 
     public ProductDAO() {
     }
 
     @Override
-    protected Product convertResultSetToEntity(ResultSet resultSet) throws SQLException {
+    protected ProductEntity convertResultSetToEntity(ResultSet resultSet) throws SQLException {
         Product product = new Product();
         product.setId(resultSet.getLong("id"));
         product.setName(resultSet.getString("name"));
@@ -169,5 +163,5 @@ public class ProductDAO extends AbstractDAO<Product> {
         return getProducts(sql);
     }
 
-
+*/
 }

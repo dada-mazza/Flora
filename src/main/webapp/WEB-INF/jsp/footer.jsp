@@ -6,11 +6,11 @@
         <div class="row">
             <div class="span3">
                 <h5>ACCOUNT</h5>
-                <a href="/login.html">YOUR ACCOUNT</a>
-                <a href="/login.html">PERSONAL INFORMATION</a>
-                <a href="/login.html">ADDRESSES</a>
-                <a href="/login.html">DISCOUNT</a>
-                <a href="/login.html">ORDER HISTORY</a>
+                <a href="login">YOUR ACCOUNT</a>
+                <a href="login">PERSONAL INFORMATION</a>
+                <a href="login">ADDRESSES</a>
+                <a href="login">DISCOUNT</a>
+                <a href="login">ORDER HISTORY</a>
             </div>
             <div class="span3">
                 <h5>INFORMATION</h5>

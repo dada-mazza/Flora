@@ -24,7 +24,7 @@ public class LogoutController {
         UserEntity userEntity = (UserEntity) model.get("userEntity");
 
         if (userEntity != null) {
-            model.clear();
+            model.remove("userEntity");
         }
 
         String url = "/login";

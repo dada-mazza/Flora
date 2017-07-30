@@ -1,13 +1,14 @@
 package ua.itea.entity;
 
 import lombok.Data;
-import org.joda.time.DateTime;
 import ua.itea.entity.enumeratiom.Gender;
 import ua.itea.entity.enumeratiom.Role;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Data
+
 @Entity
 @Table(name = "users")
 @NamedQueries({
@@ -16,12 +17,10 @@ import javax.persistence.*;
         @NamedQuery(name = "UserEntity.getUserByEmail",
                 query = "select user from UserEntity user where user.email = :email")
 })
-
-public class UserEntity {
+public class UserEntity implements FloraEntity {
 
     @Id
-    @SequenceGenerator(name = "sequence", sequenceName = "user_sequence", allocationSize = 1, initialValue = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequence")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -38,7 +37,7 @@ public class UserEntity {
     private String lastName;
 
     @Column(name = "date_of_birth", nullable = false)
-    private DateTime dateOfBirth;
+    private Date dateOfBirth;
 
     @Column(name = "gender", nullable = false)
     @Enumerated(EnumType.STRING)
@@ -53,10 +52,10 @@ public class UserEntity {
     @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
-    @Column(name = "additional_information", nullable = false)
+    @Column(name = "additional_information")
     private String additionalInformation;
 
-    @Column(name = "role", nullable = false)
+    @Column(name = "role", nullable = false, columnDefinition = "varchar(10) default 'USER'")
     @Enumerated(EnumType.STRING)
     private Role role;
 

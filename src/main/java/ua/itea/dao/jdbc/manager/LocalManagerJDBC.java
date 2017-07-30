@@ -1,4 +1,4 @@
-package ua.itea.dao.jdbc;
+package ua.itea.dao.jdbc.manager;
 
 
 import org.apache.commons.logging.Log;
@@ -16,7 +16,7 @@ public class LocalManagerJDBC implements ManagerJDBC {
 
     private Log log = LogFactory.getLog(getClass());
 
-    private final String URL = "jdbc:postgresql://localhost:5432/postgres";
+    private final String URL = "jdbc:postgresql://localhost:5432/flora";
     private final String LOGIN = "postgres";
     private final String PASSWORD = "postgres";
 

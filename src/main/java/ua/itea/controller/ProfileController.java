@@ -7,16 +7,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServlet;
+
+
 @Controller
-@RequestMapping("/")
-public class MainController {
+@RequestMapping("/profile")
+public class ProfileController extends HttpServlet {
 
     protected Log log = LogFactory.getLog(getClass());
 
     @RequestMapping(method = RequestMethod.GET)
     public String service() {
 
-        String url = "main";
+        String url = "profile";
         log.info("url -> " + url);
         return url;
     }

@@ -3,26 +3,26 @@ package ua.itea.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.List;
 
 @Data
 @Entity
 @Table(name = "categories")
-public class CategoryEntity {
+@NamedQueries({
+        @NamedQuery(name = "CategoryEntity.getAll",
+                query = "select category from CategoryEntity category")
+})
+public class CategoryEntity implements FloraEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "ukr_name", nullable = false)
-    private String ukrName;
+    @Column(name = "name", nullable = false)
+    private String name;
 
-    @Column(name = "eng_name", nullable = false)
-    private String engName;
-
-    @Column(name = "sub_categories")
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<SubCategoryEntity> subCategories;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "category", targetEntity = SubCategoryEntity.class)
+    private List<SubCategoryEntity> subCategories;
 
 }

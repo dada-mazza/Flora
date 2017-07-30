@@ -1,4 +1,4 @@
-package ua.itea.dao.jdbc;
+package ua.itea.dao.jdbc.manager;
 
 
 import java.sql.Connection;

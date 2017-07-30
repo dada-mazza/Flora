@@ -6,14 +6,13 @@ import org.apache.commons.logging.LogFactory;
 import ua.itea.entity.UserEntity;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet("/profile")
+//@WebServlet("/profile")
 public class ProfileServlet extends HttpServlet {
 
     protected Log log = LogFactory.getLog(getClass());

@@ -1,9 +1,11 @@
-package ua.itea.dao;
+package ua.itea.dao.jdbc;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import ua.itea.dao.jdbc.LocalManagerJDBC;
-import ua.itea.dao.jdbc.ManagerJDBC;
+import ua.itea.dao.DAO;
+import ua.itea.dao.jdbc.manager.LocalManagerJDBC;
+import ua.itea.dao.jdbc.manager.ManagerJDBC;
+import ua.itea.entity.FloraEntity;
 
 import java.sql.*;
 
@@ -12,7 +14,7 @@ import java.sql.*;
  *
  * @author Maksym Stetsenko
  */
-abstract class AbstractDAO<E> implements DAO<E> {
+abstract class AbstractDAO<E extends FloraEntity> implements DAO<E> {
 
     protected Log log = LogFactory.getLog(getClass());
     private static ManagerJDBC manager = new LocalManagerJDBC();
@@ -26,7 +28,8 @@ abstract class AbstractDAO<E> implements DAO<E> {
         return connection;
     }
 
-    protected void connectionClose() {
+    @Override
+    public void close() {
         manager.connectionClose();
     }
 

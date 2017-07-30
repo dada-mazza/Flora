@@ -1,4 +1,4 @@
-package ua.itea.dao;
+package ua.itea.dao.jdbc;
 
 import java.util.ArrayList;
 import java.util.List;

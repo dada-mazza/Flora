@@ -1,4 +1,4 @@
-package ua.itea.dao;
+package ua.itea.dao.jdbc;
 
 import ua.itea.entity.CategoryEntity;
 import ua.itea.entity.SubCategoryEntity;
@@ -18,26 +18,24 @@ public class CategoryDAO extends AbstractDAO<CategoryEntity> {
 
     @Override
     protected CategoryEntity convertResultSetToEntity(ResultSet resultSet) throws SQLException {
-        CategoryEntity categoryEntity = new CategoryEntity();
-        categoryEntity.setId(resultSet.getLong("id"));
-        categoryEntity.setUkrName(resultSet.getString("ukr_name"));
-        categoryEntity.setEngName(resultSet.getString("eng_name"));
-        List<SubCategoryEntity> subCategories = new SubCategoryDAO().getAllByCategory(categoryEntity);
-        // categoryEntity.setSubCategories(subCategories);
+        CategoryEntity category = new CategoryEntity();
+        category.setId(resultSet.getLong("id"));
+        category.setName(resultSet.getString("name"));
+        List<SubCategoryEntity> subCategories = new SubCategoryDAO().getAllByCategory(category);
+        category.setSubCategories(subCategories);
 
-        return categoryEntity;
+        return category;
     }
 
     @Override
-    public Long create(CategoryEntity categoryEntity) {
+    public Long create(CategoryEntity category) {
         String sql = "INSERT INTO " + NAME_TABLE
-                + " (ukr_name, eng_name)"
-                + " VALUES (?, ?)";
+                + " (name)"
+                + " VALUES (?)";
         log.info(sql);
         try {
             PreparedStatement statement = getPreparedStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, categoryEntity.getUkrName());
-            statement.setString(2, categoryEntity.getEngName());
+            statement.setString(1, category.getName());
 
             if (statement.executeUpdate() == 0) {
                 throw new SQLException("Creating CategoryEntity failed, no rows affected.");
@@ -53,59 +51,56 @@ public class CategoryDAO extends AbstractDAO<CategoryEntity> {
         } catch (SQLException e) {
             log.error(e);
         } finally {
-            connectionClose();
+            close();
         }
         return null;
     }
 
     @Override
-    public boolean delete(CategoryEntity categoryEntity) {
+    public void delete(CategoryEntity category) {
         String sql = "DELETE FROM " + NAME_TABLE
                 + " WHERE"
-                + " id = '" + categoryEntity.getId() + "'";
+                + " id = '" + category.getId() + "'";
         log.info(sql);
         try {
             if (getStatement().executeUpdate(sql) == 0) {
-                throw new SQLException("Deleting CategoryEntity failed, no rows affected.");
+                throw new SQLException("Deleting Category failed, no rows affected.");
             }
-            return true;
+
         } catch (SQLException e) {
             log.error(e);
         } finally {
-            connectionClose();
+            close();
         }
-        return false;
     }
 
     @Override
-    public boolean update(CategoryEntity categoryEntity) {
+    public CategoryEntity update(CategoryEntity category) {
         String sql = "UPDATE " + NAME_TABLE + " "
                 + " SET"
-                + " ukr_name=?"
-                + " eng_name=?"
+                + " name=?"
                 + " WHERE"
-                + " id = " + categoryEntity.getId();
+                + " id = " + category.getId();
         log.info(sql);
-        log.info(categoryEntity);
+        log.info(category);
         try {
             PreparedStatement statement = getPreparedStatement(sql);
-            statement.setString(1, categoryEntity.getUkrName());
-            statement.setString(2, categoryEntity.getEngName());
+            statement.setString(1, category.getName());
 
             if (statement.executeUpdate() == 0) {
-                throw new SQLException("Updating CategoryEntity failed, no rows affected.");
+                throw new SQLException("Updating Category failed, no rows affected.");
             }
-            return true;
+            return category;
         } catch (SQLException e) {
             log.error(e);
         } finally {
-            connectionClose();
+            close();
         }
-        return false;
+        return null;
     }
 
     @Override
-    public CategoryEntity getEntityById(Long id) {
+    public CategoryEntity getEntityById(Class<CategoryEntity> entityClass, Long id) {
         String sql = "SELECT *" +
                 " FROM " + NAME_TABLE +
                 " WHERE" +
@@ -115,7 +110,7 @@ public class CategoryDAO extends AbstractDAO<CategoryEntity> {
         try {
             ResultSet resultSet = getResultSet(sql);
             if (resultSet == null) {
-                throw new SQLException("Retrieving CategoryEntity failed.");
+                throw new SQLException("Retrieving Category failed.");
             }
             while (resultSet.next()) {
                 return convertResultSetToEntity(resultSet);
@@ -123,13 +118,13 @@ public class CategoryDAO extends AbstractDAO<CategoryEntity> {
         } catch (SQLException e) {
             log.error(e);
         } finally {
-            connectionClose();
+            close();
         }
         return null;
     }
 
     @Override
-    public List<CategoryEntity> getAll() {
+    public List<CategoryEntity> getAll(Class<CategoryEntity> entityClass) {
         List<CategoryEntity> list = null;
         String sql = "SELECT * FROM " + NAME_TABLE + ";";
         log.info(sql);
@@ -145,7 +140,7 @@ public class CategoryDAO extends AbstractDAO<CategoryEntity> {
         } catch (SQLException e) {
             log.error(e);
         } finally {
-            connectionClose();
+            close();
         }
         return list;
     }

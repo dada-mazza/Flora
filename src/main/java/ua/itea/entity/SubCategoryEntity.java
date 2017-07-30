@@ -6,29 +6,29 @@ import javax.persistence.*;
 
 @Data
 @Entity
-
 @Table(name = "sub_categories",
         uniqueConstraints = {
-                @UniqueConstraint(columnNames = {"category_id", "ukr_name"}),
-                @UniqueConstraint(columnNames = {"category_id", "eng_name"})
+                @UniqueConstraint(columnNames = {"category_id", "name"})
         })
+@NamedQueries({
+        @NamedQuery(name = "SubCategoryEntity.getAll",
+                query = "select subCategory from SubCategoryEntity subCategory"),
+        @NamedQuery(name = "SubCategoryEntity.getAllByCategory",
+                query = "select subCategory from SubCategoryEntity subCategory where subCategory.category = :category")
+})
 
-public class SubCategoryEntity {
+public class SubCategoryEntity implements FloraEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "category_id", nullable = false)
-    @ManyToOne(fetch = FetchType.LAZY)
-    private CategoryEntity categoryEntity;
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)
+    private CategoryEntity category;
 
-    @Column(name = "ukr_name", nullable = false)
-    private String ukrName;
-
-    @Column(name = "eng_name", nullable = false)
-    private String engName;
-
+    @Column(name = "name", nullable = false)
+    private String name;
 
 }

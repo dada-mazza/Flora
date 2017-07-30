@@ -9,11 +9,15 @@
     <div class="container">
         <div class="row">
 
-            <%--   <jsp:include page="/categories"/> --%>
-            <jsp:include page="products.jsp"/>
+            <!-- Sidebar =========================================================================================== -->
+            <jsp:include page="/categories"/>
+            <!-- Sidebar end ======================================================================================= -->
+
+            <jsp:include page="featuredProducts.jsp"/>
 
         </div>
     </div>
 </div>
 
+<!-- Footer ======================================================================================================== -->
 <%@include file="footer.jsp" %>

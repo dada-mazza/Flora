@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @WebFilter(
-        urlPatterns = "/*",
+        urlPatterns = "/",
         filterName = "LogFilter",
         description = "Filter for query logging (all URLs)"
 )

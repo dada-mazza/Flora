@@ -1,4 +1,4 @@
-package ua.itea.dao;
+package ua.itea.dao.jdbc;
 
 import ua.itea.entity.CategoryEntity;
 import ua.itea.entity.SubCategoryEntity;
@@ -20,35 +20,31 @@ public class SubCategoryDAO extends AbstractDAO<SubCategoryEntity> {
     protected SubCategoryEntity convertResultSetToEntity(ResultSet resultSet) throws SQLException {
         SubCategoryEntity subCategoryEntity = new SubCategoryEntity();
         subCategoryEntity.setId(resultSet.getLong("id"));
-        subCategoryEntity.setUkrName(resultSet.getString("ukr_name"));
-        subCategoryEntity.setEngName(resultSet.getString("eng_name"));
+        subCategoryEntity.setName(resultSet.getString("name"));
         return subCategoryEntity;
     }
 
-    protected SubCategoryEntity convertResultSetToEntity(ResultSet resultSet, CategoryEntity categoryEntity) throws SQLException {
+    protected SubCategoryEntity convertResultSetToEntity(ResultSet resultSet, CategoryEntity category) throws SQLException {
         SubCategoryEntity subCategoryEntity = new SubCategoryEntity();
         subCategoryEntity.setId(resultSet.getLong("id"));
-        subCategoryEntity.setUkrName(resultSet.getString("ukr_name"));
-        subCategoryEntity.setEngName(resultSet.getString("eng_name"));
-        subCategoryEntity.setCategoryEntity(categoryEntity);
+        subCategoryEntity.setName(resultSet.getString("name"));
+        subCategoryEntity.setCategory(category);
 
         return subCategoryEntity;
     }
 
     @Override
-    public Long create(SubCategoryEntity subCategoryEntity) {
+    public Long create(SubCategoryEntity subCategory) {
         String sql = "INSERT INTO " + NAME_TABLE
-                + " (category_id, ukr_name, eng_name)"
-                + " VALUES (?, ?, ?)";
+                + " (category_id, name)"
+                + " VALUES (?, ?)";
         log.info(sql);
         try {
             PreparedStatement statement = getPreparedStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            statement.setLong(1, subCategoryEntity.getCategoryEntity().getId());
-            statement.setString(2, subCategoryEntity.getUkrName());
-            statement.setString(3, subCategoryEntity.getEngName());
+            statement.setString(2, subCategory.getName());
 
             if (statement.executeUpdate() == 0) {
-                throw new SQLException("Creating SubCategoryEntity failed, no rows affected.");
+                throw new SQLException("Creating SubCategory failed, no rows affected.");
             }
 
             ResultSet generatedKeys = statement.getGeneratedKeys();
@@ -56,66 +52,62 @@ public class SubCategoryDAO extends AbstractDAO<SubCategoryEntity> {
             if (generatedKeys.next()) {
                 return generatedKeys.getLong(1);
             } else {
-                throw new SQLException("Creating SubCategoryEntity failed, no Id obtained.");
+                throw new SQLException("Creating SubCategory failed, no Id obtained.");
             }
         } catch (SQLException e) {
             log.error(e);
         } finally {
-            connectionClose();
+            close();
         }
         return null;
     }
 
     @Override
-    public boolean delete(SubCategoryEntity subCategoryEntity) {
+    public void delete(SubCategoryEntity subCategory) {
         String sql = "DELETE FROM " + NAME_TABLE
                 + " WHERE"
-                + " id = '" + subCategoryEntity.getId() + "'";
+                + " id = '" + subCategory.getId() + "'";
         log.info(sql);
         try {
             if (getStatement().executeUpdate(sql) == 0) {
-                throw new SQLException("Deleting SubCategoryEntity failed, no rows affected.");
+                throw new SQLException("Deleting SubCategory failed, no rows affected.");
             }
-            return true;
         } catch (SQLException e) {
             log.error(e);
         } finally {
-            connectionClose();
+            close();
         }
-        return false;
     }
 
     @Override
-    public boolean update(SubCategoryEntity subCategoryEntity) {
+    public SubCategoryEntity update(SubCategoryEntity subCategory) {
         String sql = "UPDATE " + NAME_TABLE + " "
                 + " SET"
                 + " category_id=?"
-                + " ukr_name=?"
-                + " eng_name=?"
+                + " name=?"
                 + " WHERE"
-                + " id = " + subCategoryEntity.getId();
+                + " id = " + subCategory.getId();
         log.info(sql);
-        log.info(subCategoryEntity);
+        log.info(subCategory);
         try {
             PreparedStatement statement = getPreparedStatement(sql);
-            statement.setLong(1, subCategoryEntity.getCategoryEntity().getId());
-            statement.setString(2, subCategoryEntity.getUkrName());
-            statement.setString(3, subCategoryEntity.getEngName());
+            statement.setLong(1, subCategory.getCategory().getId());
+            statement.setString(2, subCategory.getName());
 
             if (statement.executeUpdate() == 0) {
-                throw new SQLException("Updating SubCategoryEntity failed, no rows affected.");
+                throw new SQLException("Updating SubCategory failed, no rows affected.");
             }
-            return true;
+
         } catch (SQLException e) {
             log.error(e);
         } finally {
-            connectionClose();
+            close();
         }
-        return false;
+        return subCategory;
     }
 
     @Override
-    public SubCategoryEntity getEntityById(Long id) {
+    public SubCategoryEntity getEntityById(Class<SubCategoryEntity> entityClass, Long id) {
         String sql = "SELECT *" +
                 " FROM " + NAME_TABLE +
                 " WHERE" +
@@ -125,7 +117,7 @@ public class SubCategoryDAO extends AbstractDAO<SubCategoryEntity> {
         try {
             ResultSet resultSet = getResultSet(sql);
             if (resultSet == null) {
-                throw new SQLException("Retrieving SubCategoryEntity failed.");
+                throw new SQLException("Retrieving SubCategory failed.");
             }
             while (resultSet.next()) {
                 return convertResultSetToEntity(resultSet);
@@ -133,13 +125,13 @@ public class SubCategoryDAO extends AbstractDAO<SubCategoryEntity> {
         } catch (SQLException e) {
             log.error(e);
         } finally {
-            connectionClose();
+            close();
         }
         return null;
     }
 
     @Override
-    public List<SubCategoryEntity> getAll() {
+    public List<SubCategoryEntity> getAll(Class<SubCategoryEntity> entityClass) {
         String sql = "SELECT * FROM " + NAME_TABLE + ";";
         log.info(sql);
         List<SubCategoryEntity> list = null;
@@ -155,7 +147,7 @@ public class SubCategoryDAO extends AbstractDAO<SubCategoryEntity> {
         } catch (SQLException e) {
             log.error(e);
         } finally {
-            connectionClose();
+            close();
         }
         return list;
     }
@@ -180,7 +172,7 @@ public class SubCategoryDAO extends AbstractDAO<SubCategoryEntity> {
         } catch (SQLException e) {
             log.error(e);
         } finally {
-            connectionClose();
+            close();
         }
         return list;
     }

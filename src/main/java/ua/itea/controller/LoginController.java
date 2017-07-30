@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import ua.itea.dao.UserDAO;
+import ua.itea.dao.jdbc.UserDAO;
 import ua.itea.entity.UserEntity;
 import ua.itea.md5.MD5Util;
 
 @Controller
 @RequestMapping("/login")
-@SessionAttributes("userEntity")
+@SessionAttributes("user")
 public class LoginController {
 
     protected Log log = LogFactory.getLog(getClass());
@@ -24,9 +24,9 @@ public class LoginController {
     @RequestMapping(method = RequestMethod.GET)
     public String doGet(ModelMap model) {
 
-        UserEntity userEntity = (UserEntity) model.get("userEntity");
+        UserEntity user = (UserEntity) model.get("user");
 
-        if (userEntity != null) {
+        if (user != null) {
             String url = "logout";
             log.info("url -> " + url);
             return url;
@@ -46,13 +46,13 @@ public class LoginController {
         log.info("submit : " + submit);
         if (StringUtils.equals(submit, "Sign In")) {
             String md5Password = MD5Util.md5Apache(password);
-            UserEntity userEntity = new UserDAO().getEntityByEmail(email);
+            UserEntity user = new UserDAO().getEntityByEmail(email);
 
-            if (userEntity != null
-                    && email.equals(userEntity.getEmail())
-                    && md5Password.equals(userEntity.getPassword())) {
+            if (user != null
+                    && email.equals(user.getEmail())
+                    && md5Password.equals(user.getPassword())) {
                 log.info("access granted for " + email);
-                model.addAttribute("userEntity", userEntity);
+                model.addAttribute("user", user);
                 String url = "/main";
                 log.info("url -> " + url);
                 return url;

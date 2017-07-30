@@ -11,16 +11,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import ua.itea.dao.UserDAO;
+import ua.itea.dao.jdbc.UserDAO;
 import ua.itea.entity.UserEntity;
 import ua.itea.entity.enumeratiom.Gender;
 import ua.itea.entity.enumeratiom.Role;
 import ua.itea.md5.MD5Util;
 import ua.itea.validator.Validator;
 
+import java.sql.Date;
+
 @Controller
 @RequestMapping("/registration")
-@SessionAttributes("userEntity")
+@SessionAttributes("user")
 public class RegistrationController {
 
     protected Log log = LogFactory.getLog(getClass());
@@ -28,10 +30,10 @@ public class RegistrationController {
     @RequestMapping(method = RequestMethod.GET)
     public String doGet(ModelMap model) {
 
-        UserEntity userEntity = (UserEntity) model.get("userEntity");
+        UserEntity user = (UserEntity) model.get("user");
         String url;
 
-        if (userEntity != null) {
+        if (user != null) {
             url = "profile";
         } else {
             url = "login";
@@ -105,28 +107,25 @@ public class RegistrationController {
 
 
             if (validator.isValid()) {
-                UserEntity userEntity = new UserEntity();
-                userEntity.setEmail(email);
-                userEntity.setPassword(MD5Util.md5Apache(password));
-                userEntity.setFirstName(firstName);
-                userEntity.setLastName(lastName);
-                userEntity.setDateOfBirth(new DateTime(
-                        Integer.parseInt(yearOfBirth),
-                        Integer.parseInt(monthOfBirth),
-                        Integer.parseInt(dayOfBirth),
-                        0, 0));
-                userEntity.setGender(Gender.valueOf(gender));
-                userEntity.setAddress(address);
-                userEntity.setCity(city);
-                userEntity.setPhoneNumber(phoneNumber);
-                userEntity.setAdditionalInformation(additionalInformation);
-                userEntity.setRole(Role.USER);
+                UserEntity user = new UserEntity();
+                user.setEmail(email);
+                user.setPassword(MD5Util.md5Apache(password));
+                user.setFirstName(firstName);
+                user.setLastName(lastName);
+                DateTime dateTime = new DateTime(Integer.parseInt(yearOfBirth), Integer.parseInt(monthOfBirth), Integer.parseInt(dayOfBirth), 0, 0);
+                user.setDateOfBirth(new Date(dateTime.getMillis()));
+                user.setGender(Gender.valueOf(gender));
+                user.setAddress(address);
+                user.setCity(city);
+                user.setPhoneNumber(phoneNumber);
+                user.setAdditionalInformation(additionalInformation);
+                user.setRole(Role.USER);
 
-                userEntity.setId(new UserDAO().create(userEntity));
+                user.setId(new UserDAO().create(user));
 
-                if (userEntity.getId() != null) {
-                    log.info("UserEntity has bean registered : " + email);
-                    model.addAttribute("user", userEntity);
+                if (user.getId() != null) {
+                    log.info("User has bean registered : " + email);
+                    model.addAttribute("user", user);
                     String url = "/";
                     log.info("url -> " + url);
                     return url;
@@ -136,7 +135,7 @@ public class RegistrationController {
                 }
 
             } else {
-                log.info("UserEntity has not bean registered : " + email);
+                log.info("User has not bean registered : " + email);
                 model.addAttribute("validator", validator);
                 String url = "/registration";
                 log.info("url -> " + url);

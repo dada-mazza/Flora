@@ -10,13 +10,34 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <properties>
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://ec2-79-125-5-199.eu-west-1.compute.amazonaws.com:5432/dcogjakbcm9051"/>
-            <property name="javax.persistence.jdbc.userEntity" value="clbkfqyykwplrn"/>
-            <property name="javax.persistence.jdbc.password" value="861835dc32f50fb4199319fd404196b29906cd9bf97b768f7074c27a71ee8eb9"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/flora"/>
+            <property name="javax.persistence.jdbc.user" value="postgres"/>
+            <property name="javax.persistence.jdbc.password" value="postgres"/>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
 
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect"/>
-            <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="true"/>
+
+        </properties>
+
+    </persistence-unit>
+
+
+    <persistence-unit name="entityManagerHeroku" transaction-type="RESOURCE_LOCAL">
+
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <properties>
+            <property name="javax.persistence.jdbc.url"
+                      value="jdbc:postgresql://ec2-79-125-5-199.eu-west-1.compute.amazonaws.com:5432/dcogjakbcm9051"/>
+            <property name="javax.persistence.jdbc.user" value="clbkfqyykwplrn"/>
+            <property name="javax.persistence.jdbc.password"
+                      value="861835dc32f50fb4199319fd404196b29906cd9bf97b768f7074c27a71ee8eb9"/>
+            <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.show_sql" value="true"/>
 
         </properties>

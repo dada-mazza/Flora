@@ -1,10 +1,12 @@
-package ua.itea.dao;
+package ua.itea.dao.jdbc;
 
-import org.joda.time.DateTime;
 import ua.itea.entity.UserEntity;
 import ua.itea.entity.enumeratiom.Gender;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +25,7 @@ public class UserDAO extends AbstractDAO<UserEntity> {
         userEntity.setPassword(resultSet.getString("password"));
         userEntity.setFirstName(resultSet.getString("first_name"));
         userEntity.setLastName(resultSet.getString("second_name"));
-        userEntity.setDateOfBirth(new DateTime(resultSet.getDate("date_of_birth")));
+        userEntity.setDateOfBirth(resultSet.getDate("date_of_birth"));
         userEntity.setGender(Gender.valueOf(resultSet.getString("gender")));
         userEntity.setAddress(resultSet.getString("address"));
         userEntity.setCity(resultSet.getString("city"));
@@ -55,7 +57,7 @@ public class UserDAO extends AbstractDAO<UserEntity> {
             statement.setString(2, userEntity.getPassword());
             statement.setString(3, userEntity.getFirstName());
             statement.setString(4, userEntity.getLastName());
-            statement.setDate(5, new Date(userEntity.getDateOfBirth().getMillis()));
+            statement.setDate(5, userEntity.getDateOfBirth());
             statement.setString(6, userEntity.getGender().name());
             statement.setString(7, userEntity.getAddress());
             statement.setString(8, userEntity.getCity());
@@ -76,13 +78,13 @@ public class UserDAO extends AbstractDAO<UserEntity> {
         } catch (SQLException e) {
             log.error(e);
         } finally {
-            connectionClose();
+            close();
         }
         return null;
     }
 
     @Override
-    public boolean delete(UserEntity userEntity) {
+    public void delete(UserEntity userEntity) {
         String sql = "DELETE FROM " + NAME_TABLE
                 + " WHERE"
                 + " id = '" + userEntity.getId() + "'";
@@ -91,17 +93,16 @@ public class UserDAO extends AbstractDAO<UserEntity> {
             if (getStatement().executeUpdate(sql) == 0) {
                 throw new SQLException("Deleting UserEntity failed, no rows affected.");
             }
-            return true;
         } catch (SQLException e) {
             log.error(e);
         } finally {
-            connectionClose();
+            close();
         }
-        return false;
+
     }
 
     @Override
-    public boolean update(UserEntity userEntity) {
+    public UserEntity update(UserEntity userEntity) {
         String sql = "UPDATE " + NAME_TABLE + " "
                 + " SET email=?,"
                 + " password=?,"
@@ -123,7 +124,7 @@ public class UserDAO extends AbstractDAO<UserEntity> {
             statement.setString(2, userEntity.getPassword());
             statement.setString(3, userEntity.getFirstName());
             statement.setString(4, userEntity.getLastName());
-            statement.setDate(5, new Date(userEntity.getDateOfBirth().getMillis()));
+            statement.setDate(5, userEntity.getDateOfBirth());
             statement.setString(6, userEntity.getGender().name());
             statement.setString(7, userEntity.getAddress());
             statement.setString(8, userEntity.getCity());
@@ -133,13 +134,12 @@ public class UserDAO extends AbstractDAO<UserEntity> {
             if (statement.executeUpdate() == 0) {
                 throw new SQLException("Updating UserEntity failed, no rows affected.");
             }
-            return true;
         } catch (SQLException e) {
             log.error(e);
         } finally {
-            connectionClose();
+            close();
         }
-        return false;
+        return userEntity;
     }
 
     private UserEntity getEntityFromExecuteQuery(String sql) {
@@ -154,13 +154,13 @@ public class UserDAO extends AbstractDAO<UserEntity> {
         } catch (SQLException e) {
             log.error(e);
         } finally {
-            connectionClose();
+            close();
         }
         return null;
     }
 
     @Override
-    public UserEntity getEntityById(Long id) {
+    public UserEntity getEntityById(Class<UserEntity> entityClass, Long id) {
         String sql = "SELECT *" +
                 " FROM " + NAME_TABLE +
                 " WHERE" +
@@ -181,7 +181,7 @@ public class UserDAO extends AbstractDAO<UserEntity> {
     }
 
     @Override
-    public List<UserEntity> getAll() {
+    public List<UserEntity> getAll(Class<UserEntity> entityClass) {
         List<UserEntity> list = null;
         String sql = "SELECT * FROM " + NAME_TABLE + ";";
         log.info(sql);
@@ -197,7 +197,7 @@ public class UserDAO extends AbstractDAO<UserEntity> {
         } catch (SQLException e) {
             log.error(e);
         } finally {
-            connectionClose();
+            close();
         }
         return list;
     }

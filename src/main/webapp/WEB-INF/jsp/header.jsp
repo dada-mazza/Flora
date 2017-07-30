@@ -28,7 +28,7 @@
 <div id="header">
     <div class="container">
         <div id="welcomeLine" class="row">
-            <div class="span6">Welcome! <strong> ${userEntity.firstName} ${userEntity.lastName} </strong></div>
+            <div class="span6">Welcome! <strong> ${user.firstName} ${user.lastName} </strong></div>
             <div class="span6">
                 <div class="pull-right">
                     <span class="btn btn-mini">999,99</span>
@@ -68,14 +68,14 @@
                     <li class=""><a href="contact">Contact</a></li>
 
                     <!-- Login ==================================================================================== -->
-                    <c:if test="${empty userEntity}">
+                    <c:if test="${empty user}">
                         <li class="">
                             <a href="login">
                                 <span class="btn btn-large btn-success">Login</span>
                             </a>
                         </li>
                     </c:if>
-                    <c:if test="${not empty userEntity}">
+                    <c:if test="${not empty user}">
                         <li class="">
                             <a href="logout">
                                 <span class="btn btn-large btn-success">Logout</span>

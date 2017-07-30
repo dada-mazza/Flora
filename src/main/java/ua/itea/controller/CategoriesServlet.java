@@ -3,18 +3,17 @@ package ua.itea.controller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import ua.itea.dao.CategoryDAO;
+import ua.itea.dao.jdbc.CategoryDAO;
 import ua.itea.entity.CategoryEntity;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/categories")
+//WebServlet("/categories")
 public class CategoriesServlet extends HttpServlet {
 
     protected Log log = LogFactory.getLog(getClass());
@@ -22,9 +21,9 @@ public class CategoriesServlet extends HttpServlet {
     @Override
     public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nameAttribute = "categories";
-        List<CategoryEntity> categories = new CategoryDAO().getAll();
+        List<CategoryEntity> categories = new CategoryDAO().getAll(CategoryEntity.class);
         request.setAttribute(nameAttribute, categories);
-        String includeURL = "sidebar.jsp";
+        String includeURL = "categories.jsp";
         log.info("include : " + includeURL);
         request.getRequestDispatcher(includeURL).include(request, response);
     }
