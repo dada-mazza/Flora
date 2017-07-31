@@ -4,8 +4,23 @@
 <div id="sidebar" class="span3">
     <div class="well well-small">
         <a id="myCart" href="product_summary.jsp">
-            <img src="../../themes/images/ico-cart.png" alt="cart"> 999 Items in your cart <span
-                class="badge badge-warning pull-right"> &#8372 999.99 </span>
+            <img src="../../themes/images/ico-cart.png" alt="cart">
+            <span class="totalItemsCart">
+                <c:choose>
+                    <c:when test="${not empty cart}">[ ${cart.totalItems} ]</c:when>
+                    <c:otherwise>0</c:otherwise>
+                </c:choose>
+            </span>
+            Items in your cart
+            <span class="badge badge-warning pull-right">
+                <span> &#8372 </span>
+                 <span class="totalAmountCart">
+                        <c:choose>
+                            <c:when test="${not empty cart}">${cart.totalAmount / 100}</c:when>
+                            <c:otherwise>0</c:otherwise>
+                        </c:choose>
+                    </span>
+            </span>
         </a>
     </div>
     <ul id="sideManu" class="nav nav-tabs nav-stacked">

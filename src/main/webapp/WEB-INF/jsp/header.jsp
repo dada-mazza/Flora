@@ -12,7 +12,6 @@
 
     <!-- Google-code-prettify -->
     <link href="../../themes/js/google-code-prettify/prettify.css" rel="stylesheet"/>
-    <link href="../../themes/js/google-code-prettify/prettify.css" rel="stylesheet"/>
     <!-- Flora style responsive -->
     <link href="../../themes/css/flora-bootstrap.css" rel="stylesheet" media="screen"/>
     <link href="../../themes/css/flora-bootstrap-responsive.css" rel="stylesheet"/>
@@ -31,11 +30,23 @@
             <div class="span6">Welcome! <strong> ${user.firstName} ${user.lastName} </strong></div>
             <div class="span6">
                 <div class="pull-right">
-                    <span class="btn btn-mini">999,99</span>
+                    <span class="btn btn-mini totalAmountCart">
+                        <c:choose>
+                            <c:when test="${not empty cart}">${cart.totalAmount / 100}</c:when>
+                            <c:otherwise>0</c:otherwise>
+                        </c:choose>
+                    </span>
                     <a href="product_summary."><span class="">&#8372</span></a>
                     <a href="product_summary">
                         <span class="btn btn-mini btn-primary">
-                            <i class="icon-shopping-cart icon-white"></i> [ 999 ] Itemes in your cart
+                            <i class="icon-shopping-cart icon-white"></i>
+                            <span class="totalItemsCart">
+                            <c:choose>
+                                <c:when test="${not empty cart}">[ ${cart.totalItems} ]</c:when>
+                                <c:otherwise>[ 0 ]</c:otherwise>
+                            </c:choose>
+                         </span>
+                            Itemes in your cart
                         </span>
                     </a>
                 </div>

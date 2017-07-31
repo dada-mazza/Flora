@@ -61,9 +61,17 @@
                                                 <a class="btn" href="product_detailsl">
                                                     <i class="icon-zoom-in"></i>
                                                 </a>
-                                                <a class="btn" href="product_details">
-                                                    Add to <i class="icon-shopping-cart"></i>
+                                                <a class="btn" href="">
+                                                    Add to <i class="icon-shopping-cart">
+                                                    <div class="hide product">
+                                                        <div class="productId">${product.id}</div>
+                                                        <div class="productName">${product.name}</div>
+                                                        <div class="productPrice">${product.price}</div>
+                                                    </div>
+                                                </i>
                                                 </a>
+
+
                                                 <a class="btn btn-primary"
                                                    href="product_details">&#8372 ${product.price / 100}
                                                 </a>
@@ -98,7 +106,7 @@
                                             <input type="checkbox"> Adds product to compair
                                         </label>
                                         <br/>
-                                        <a href="product_details" class="btn btn-large btn-primary">
+                                        <a href="" class="btn btn-large btn-primary">
                                             Add to <i class=" icon-shopping-cart"></i>
                                         </a>
                                         <a href="product_details" class="btn btn-large">

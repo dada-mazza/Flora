@@ -52,4 +52,36 @@ public class ProductEntity implements FloraEntity {
                 ", subCategory=" + (subCategory == null ? "" : subCategory.getId()) +
                 '}';
     }
+
+
+    private Integer quantity;
+
+    public Integer getTotalAmount() {
+
+        Integer totalAmount = 0;
+        if (price != null && quantity != null) {
+            totalAmount = price * quantity;
+        }
+        return totalAmount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        ProductEntity that = (ProductEntity) o;
+
+        if (!id.equals(that.id)) return false;
+        return name.equals(that.name);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + id.hashCode();
+        result = 31 * result + name.hashCode();
+        return result;
+    }
 }
