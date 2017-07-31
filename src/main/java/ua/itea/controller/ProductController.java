@@ -15,12 +15,11 @@ import ua.itea.entity.CategoryEntity;
 import ua.itea.entity.ProductEntity;
 import ua.itea.entity.SubCategoryEntity;
 
-import javax.servlet.http.HttpServlet;
 import java.util.List;
 
 @Controller
 @RequestMapping("/products")
-public class ProductController extends HttpServlet {
+public class ProductController {
 
     protected Log log = LogFactory.getLog(getClass());
 

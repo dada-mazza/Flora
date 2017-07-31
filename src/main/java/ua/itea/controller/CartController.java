@@ -9,12 +9,10 @@ import org.springframework.web.bind.annotation.*;
 import ua.itea.entity.Cart;
 import ua.itea.entity.ProductEntity;
 
-import javax.servlet.http.HttpServlet;
-
 @RestController
 @RequestMapping("/addProductToCart")
 @SessionAttributes("cart")
-public class CartController extends HttpServlet {
+public class CartController {
 
     protected Log log = LogFactory.getLog(getClass());
 

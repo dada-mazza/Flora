@@ -11,14 +11,13 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import ua.itea.dao.jpa.CategoryDAO;
 import ua.itea.entity.CategoryEntity;
 
-import javax.servlet.http.HttpServlet;
 import java.util.List;
 
 
 @Controller
 @RequestMapping("/categories")
 @SessionAttributes("categories")
-public class CategoryController extends HttpServlet {
+public class CategoryController {
 
     protected Log log = LogFactory.getLog(getClass());
 
