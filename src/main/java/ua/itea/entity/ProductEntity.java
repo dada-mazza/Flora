@@ -53,7 +53,6 @@ public class ProductEntity implements FloraEntity {
                 '}';
     }
 
-
     private Integer quantity;
 
     public Integer getTotalAmount() {
