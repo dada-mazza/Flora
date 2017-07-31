@@ -36,8 +36,8 @@
                             <c:otherwise>0</c:otherwise>
                         </c:choose>
                     </span>
-                    <a href="product_summary."><span class="">&#8372</span></a>
-                    <a href="product_summary">
+                    <a href="/shoppingCart"><span class="">&#8372</span></a>
+                    <a href="/shoppingCart">
                         <span class="btn btn-mini btn-primary">
                             <i class="icon-shopping-cart icon-white"></i>
                             <span class="totalItemsCart">

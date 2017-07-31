@@ -67,13 +67,21 @@ public class ProductEntity implements FloraEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
+
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         ProductEntity that = (ProductEntity) o;
 
-        if (!id.equals(that.id)) return false;
+        if (!id.equals(that.id)) {
+            return false;
+        }
+
         return name.equals(that.name);
     }
 

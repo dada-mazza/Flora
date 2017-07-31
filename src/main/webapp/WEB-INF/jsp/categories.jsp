@@ -3,7 +3,7 @@
 
 <div id="sidebar" class="span3">
     <div class="well well-small">
-        <a id="myCart" href="product_summary.jsp">
+        <a id="myCart" href="/shoppingCart">
             <img src="../../themes/images/ico-cart.png" alt="cart">
             <span class="totalItemsCart">
                 <c:choose>

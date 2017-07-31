@@ -58,7 +58,7 @@ $(function () {
 });
 
 /* add to cart */
-function getJsonProduct(element) {
+function getProductJson(element) {
 
     var product = new Object();
     product.id = $(element).find('.product .productId').text();
@@ -77,7 +77,6 @@ function sendProductToCart(url, productJson) {
         dataType: "json",
         success: function (data) {
             alert("Product added to cart");
-            //alert(data.totalItems + " : " + data.totalAmount);
             $(".totalAmountCart").text(data.totalAmount / 100);
             $(".totalItemsCart").text(data.totalItems);
         },
@@ -95,9 +94,7 @@ $(function () {
         $(this).parent().click(
             function (e) {
                 e.preventDefault();
-                alert(getJsonProduct($(this)));
-                sendProductToCart("/addProductToCart", getJsonProduct($(this)));
-
+                sendProductToCart("/addProductToCart", getProductJson($(this)));
             });
     });
 
