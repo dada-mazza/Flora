@@ -24,7 +24,7 @@
                 <h5>OUR OFFERS</h5>
                 <a href="/products">NEW PRODUCTS</a>
                 <a href="/products">TOP SELLERS</a>
-                <a href="/special_offer">SPECIAL OFFERS</a>
+                <a href="/specialOffers">SPECIAL OFFERS</a>
                 <a href="/products">MANUFACTURERS</a>
                 <a href="/products">SUPPLIERS</a>
             </div>

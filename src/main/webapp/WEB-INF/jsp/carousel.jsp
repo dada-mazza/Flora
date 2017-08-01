@@ -6,7 +6,7 @@
         <div class="carousel-inner">
             <div class="item active">
                 <div class="container">
-                    <a href="special_offer.jsp">
+                    <a href="/specialOffers">
                         <img style="width:100%" src="../../themes/images/carousel/001.png" alt="/special offers"/>
                     </a>
                     <div class="carousel-caption">
@@ -18,7 +18,7 @@
             </div>
             <div class="item">
                 <div class="container">
-                    <a href="/special_offer.jsp">
+                    <a href="/specialOffers">
                         <img style="width:100%" src="../../themes/images/carousel/002.png" alt=""/>
                     </a>
                     <div class="carousel-caption">
@@ -30,7 +30,7 @@
             </div>
             <div class="item">
                 <div class="container">
-                    <a href="/special_offer.jsp">
+                    <a href="/specialOffers">
                         <img style="width:100%" src="../../themes/images/carousel/003.png" alt=""/>
                     </a>
                     <div class="carousel-caption">

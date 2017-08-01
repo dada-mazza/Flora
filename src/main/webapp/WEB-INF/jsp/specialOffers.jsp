@@ -14,17 +14,13 @@
             <div class="span9">
                 <ul class="breadcrumb">
                     <li><a href="/">Home</a> <span class="divider">/</span></li>
-                    <li class="active">Products</li>
+                    <li class="active">Special offers</li>
                 </ul>
-                <h3> Products Name
-                    <small class="pull-right"> ${products.size()} products are available</small>
+                <h3> Special offers
+                    <small class="pull-right"> ${offers.size()} products are available</small>
                 </h3>
                 <hr class="soft"/>
-                <p>
-                    ${category.name}
-                    <c:if test="${not empty subCategory}"> / ${subCategory.name}</c:if>
-                </p>
-                <hr class="soft"/>
+
                 <form class="form-horizontal span6">
                     <div class="control-group">
                         <label class="control-label alignL">Sort By </label>
@@ -54,7 +50,7 @@
                 <div class="tab-content">
                     <div class="tab-pane  active" id="blockView">
                         <ul class="thumbnails">
-                            <c:forEach var="product" items="${products}">
+                            <c:forEach var="product" items="${offers}">
                                 <li class="span3">
                                     <div class="thumbnail">
                                         <a href="/product_details?productId=${product.id}">
@@ -89,7 +85,7 @@
                     </div>
 
                     <div class="tab-pane" id="listView">
-                        <c:forEach var="product" items="${products}">
+                        <c:forEach var="product" items="${offers}">
                             <div class="row">
                                 <div class="span2">
                                     <img src="/themes/images/products/${product.id}.png"

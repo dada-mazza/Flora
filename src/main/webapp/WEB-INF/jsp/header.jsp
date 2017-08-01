@@ -80,7 +80,7 @@
                 </form>
 
                 <ul id="topMenu" class="nav pull-right">
-                    <li class=""><a href="/special_offer">Specials Offer</a></li>
+                    <li class=""><a href="/specialOffers">Specials Offer</a></li>
                     <li class=""><a href="/delivery">Delivery</a></li>
                     <li class=""><a href="/contact">Contact</a></li>
 
