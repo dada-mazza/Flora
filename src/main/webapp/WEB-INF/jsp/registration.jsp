@@ -43,7 +43,7 @@
                         </div>
                     </c:if>
 
-                    <form class="form-horizontal" action="registration" method="post">
+                    <form class="form-horizontal" action="/registration" method="post">
                         <h4>Your personal information</h4>
 
                         <%-- password --%>
@@ -335,7 +335,6 @@
                             </div>
                         </c:if>
 
-
                         <p><sup>*</sup>Required field </p>
 
                         <div class="control-group">
@@ -354,6 +353,7 @@
 </div>
 
 <!-- Footer ======================================================================================================== -->
+<script src="../../themes/js/registration.js" type="text/javascript"></script>
 <%@include file="footer.jsp" %>
 
-<script src="../../themes/js/registration.js" type="text/javascript"></script>
+

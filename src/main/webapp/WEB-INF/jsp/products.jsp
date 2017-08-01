@@ -38,27 +38,33 @@
                 </form>
 
                 <div id="myTab" class="pull-right">
-                    <a href="#listView" data-toggle="tab"><span class="btn btn-large"><i
-                            class="icon-list"></i></span></a>
-                    <a href="#blockView" data-toggle="tab"><span class="btn btn-large btn-primary"><i
-                            class="icon-th-large"></i></span></a>
+                    <a href="#listView" data-toggle="tab">
+                        <span class="btn btn-large">
+                            <i class="icon-list"></i>
+                        </span>
+                    </a>
+                    <a href="#blockView" data-toggle="tab">
+                        <span class="btn btn-large btn-primary">
+                            <i class="icon-th-large"></i>
+                        </span>
+                    </a>
                 </div>
                 <br class="clr"/>
-                <div class="tab-content">
 
+                <div class="tab-content">
                     <div class="tab-pane  active" id="blockView">
                         <ul class="thumbnails">
                             <c:forEach var="product" items="${products}">
                                 <li class="span3">
                                     <div class="thumbnail">
-                                        <a href="product_details">
+                                        <a href="/product_details?productId=${product.id}">
                                             <img src="/themes/images/products/${product.id}.png" alt="${product.name}"/>
                                         </a>
                                         <div class="caption">
                                             <h5>${product.name}</h5>
                                             <p>${product.name}</p>
                                             <h4 style="text-align:center">
-                                                <a class="btn" href="product_detailsl">
+                                                <a class="btn" href="/product_details?productId=${product.id}">
                                                     <i class="icon-zoom-in"></i>
                                                 </a>
                                                 <a class="btn" href="">
@@ -70,10 +76,8 @@
                                                     </div>
                                                 </i>
                                                 </a>
-
-
-                                                <a class="btn btn-primary"
-                                                   href="product_details">&#8372 ${product.price / 100}
+                                                <a class="btn btn-primary" href="/shoppingCart?productId=${product.id}">
+                                                    &#8372 ${product.price / 100}
                                                 </a>
                                             </h4>
                                         </div>
@@ -96,7 +100,8 @@
                                     <hr class="soft"/>
                                     <h5>${product.name}</h5>
                                     <p>${product.description}</p>
-                                    <a class="btn btn-small pull-right" href="product_details">View Details</a>
+                                    <a class="btn btn-small pull-right" href="/product_details?productId=${product.id}">View
+                                        Details</a>
                                     <br class="clr"/>
                                 </div>
                                 <div class="span3 alignR">
@@ -109,7 +114,7 @@
                                         <a href="" class="btn btn-large btn-primary">
                                             Add to <i class=" icon-shopping-cart"></i>
                                         </a>
-                                        <a href="product_details" class="btn btn-large">
+                                        <a href="/product_details?productId=${product.id}" class="btn btn-large">
                                             <i class="icon-zoom-in"></i>
                                         </a>
                                     </form>

@@ -168,7 +168,7 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label class="control-label" for="inputPost">Post Code/ Zipcode </label>
+                                        <label class="control-label" for="inputPost">Post Code / Zipcode </label>
                                         <div class="controls">
                                             <input type="text" id="inputPost" placeholder="Postcode">
                                         </div>

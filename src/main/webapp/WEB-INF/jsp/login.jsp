@@ -110,7 +110,7 @@
                                 <div class="control-group">
                                     <div class="controls">
                                         <button type="submit" name="submit" class="btn" value="Sign In">Sign In</button>
-                                        <a href="forgotPassword">Forgot password?</a>
+                                        <a href="/forgotPassword">Forgot password?</a>
                                     </div>
                                 </div>
                             </form>

@@ -64,7 +64,10 @@
                     <img src="../../themes/images/logo/logo.png" alt="Flora"/>
                 </a>
 
+                <!-- Get Categories ================================================================================ -->
                 <jsp:include page="/categories"/>
+                <!-- Get Categories ================================================================================ -->
+
                 <form class="form-inline navbar-search" method="post" action="/products/search">
                     <input id="srchFld" class="srchTxt" name="inputNameProduct" type="text"/>
                     <select class="srchTxt" name="selectCategoryId">
@@ -77,9 +80,9 @@
                 </form>
 
                 <ul id="topMenu" class="nav pull-right">
-                    <li class=""><a href="special_offer">Specials Offer</a></li>
-                    <li class=""><a href="normal">Delivery</a></li>
-                    <li class=""><a href="contact">Contact</a></li>
+                    <li class=""><a href="/special_offer">Specials Offer</a></li>
+                    <li class=""><a href="/delivery">Delivery</a></li>
+                    <li class=""><a href="/contact">Contact</a></li>
 
                     <!-- Login ==================================================================================== -->
                     <c:if test="${empty user}">
@@ -91,8 +94,8 @@
                     </c:if>
                     <c:if test="${not empty user}">
                         <li class="">
-                            <a href="/logout">
-                                <span class="btn btn-large btn-success">Logout</span>
+                            <a href="/profile">
+                                <span class="btn btn-large btn-success">Profile</span>
                             </a>
                         </li>
                     </c:if>
