@@ -21,10 +21,11 @@ public class CategoryController {
 
     protected Log log = LogFactory.getLog(getClass());
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST})
     public String doGet(ModelMap model) {
 
         List<CategoryEntity> categories = (List<CategoryEntity>) model.get("categories");
+
         if (categories == null) {
             categories = new CategoryDAO().getAll();
             model.addAttribute("categories", categories);

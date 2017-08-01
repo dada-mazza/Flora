@@ -13,7 +13,7 @@ public class MainController {
 
     protected Log log = LogFactory.getLog(getClass());
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST})
     public String service() {
 
         String url = "main";

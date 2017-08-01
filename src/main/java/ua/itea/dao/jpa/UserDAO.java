@@ -2,7 +2,6 @@ package ua.itea.dao.jpa;
 
 import ua.itea.entity.UserEntity;
 
-import javax.persistence.TypedQuery;
 import java.util.List;
 
 /**
@@ -19,8 +18,11 @@ public class UserDAO extends AbstractDAO<UserEntity> {
     }
 
     public UserEntity getUserByEmail(String email) {
-        TypedQuery<UserEntity> query = getEntityManager().createNamedQuery("UserEntity.getUserByEmail", UserEntity.class);
-        return query.getSingleResult();
+        UserEntity user = getEntityManager()
+                .createNamedQuery("UserEntity.getUserByEmail", UserEntity.class)
+                .setParameter("email", email)
+                .getSingleResult();
+        return user;
     }
 
     public List<UserEntity> getAll() {

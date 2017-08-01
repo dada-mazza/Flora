@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import ua.itea.dao.jdbc.UserDAO;
+import ua.itea.dao.jpa.UserDAO;
 import ua.itea.entity.UserEntity;
 import ua.itea.entity.enumeratiom.Gender;
 import ua.itea.entity.enumeratiom.Role;

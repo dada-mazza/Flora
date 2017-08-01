@@ -90,7 +90,8 @@ function sendProductToCart(url, productJson) {
 
 $(function () {
 
-    $('.icon-shopping-cart').each(function () {
+    $('.icon-shopping-cart:has(.product)').each(function () {
+
         $(this).parent().click(
             function (e) {
                 e.preventDefault();

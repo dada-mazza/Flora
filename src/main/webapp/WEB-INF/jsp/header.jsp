@@ -81,14 +81,14 @@
                     <!-- Login ==================================================================================== -->
                     <c:if test="${empty user}">
                         <li class="">
-                            <a href="login">
+                            <a href="/login">
                                 <span class="btn btn-large btn-success">Login</span>
                             </a>
                         </li>
                     </c:if>
                     <c:if test="${not empty user}">
                         <li class="">
-                            <a href="logout">
+                            <a href="/logout">
                                 <span class="btn btn-large btn-success">Logout</span>
                             </a>
                         </li>
