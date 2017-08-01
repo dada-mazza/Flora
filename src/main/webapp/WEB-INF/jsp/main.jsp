@@ -10,7 +10,7 @@
         <div class="row">
 
             <!-- Sidebar =========================================================================================== -->
-            <jsp:include page="/categories"/>
+            <jsp:include page="categories.jsp"/>
             <!-- Sidebar end ======================================================================================= -->
 
             <jsp:include page="featuredProducts.jsp"/>

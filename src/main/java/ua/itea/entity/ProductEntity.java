@@ -12,9 +12,18 @@ import javax.persistence.*;
         @NamedQuery(name = "ProductEntity.getAll",
                 query = "select products from ProductEntity products"),
         @NamedQuery(name = "ProductEntity.getProductsByCategory",
-                query = "select products from ProductEntity products where products.category = :category"),
+                query = "select products from ProductEntity products" +
+                        " where products.category = :category"),
         @NamedQuery(name = "ProductEntity.getProductsBySubCategory",
-                query = "select products from ProductEntity products where products.subCategory = :subCategory")
+                query = "select products from ProductEntity products" +
+                        " where products.subCategory = :subCategory"),
+        @NamedQuery(name = "ProductEntity.getProductsByName",
+                query = "select products from ProductEntity products" +
+                        " where lower(products.name) like concat(concat('%',lower(:productName)),'%')"),
+        @NamedQuery(name = "ProductEntity.getProductsByNameAndCategory",
+                query = "select products from ProductEntity products" +
+                        " where products.category = :category" +
+                        " and lower(products.name) like concat(concat('%',lower(:productName)),'%')"),
 })
 
 public class ProductEntity implements FloraEntity {

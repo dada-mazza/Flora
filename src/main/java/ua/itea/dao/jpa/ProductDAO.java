@@ -1,5 +1,6 @@
 package ua.itea.dao.jpa;
 
+
 import ua.itea.entity.CategoryEntity;
 import ua.itea.entity.ProductEntity;
 import ua.itea.entity.SubCategoryEntity;
@@ -34,7 +35,25 @@ public class ProductDAO extends AbstractDAO<ProductEntity> {
     public List<ProductEntity> getProductsBySubCategory(SubCategoryEntity subCategory) {
         List<ProductEntity> result = getEntityManager()
                 .createNamedQuery("ProductEntity.getProductsBySubCategory", ProductEntity.class)
-                .setParameter("subCategory", subCategory).getResultList();
+                .setParameter("subCategory", subCategory)
+                .getResultList();
+        return result;
+    }
+
+    public List<ProductEntity> getProductsByName(String productName) {
+        List<ProductEntity> result = getEntityManager()
+                .createNamedQuery("ProductEntity.getProductsByName", ProductEntity.class)
+                .setParameter("productName", productName)
+                .getResultList();
+        return result;
+    }
+
+    public List<ProductEntity> getProductsByNameAndCategory(String productName, CategoryEntity category) {
+        List<ProductEntity> result = getEntityManager()
+                .createNamedQuery("ProductEntity.getProductsByNameAndCategory", ProductEntity.class)
+                .setParameter("productName", "%" + productName + "%")
+                .setParameter("category", category)
+                .getResultList();
         return result;
     }
 }

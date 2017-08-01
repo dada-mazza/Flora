@@ -15,6 +15,8 @@ import ua.itea.entity.CategoryEntity;
 import ua.itea.entity.ProductEntity;
 import ua.itea.entity.SubCategoryEntity;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 @Controller
@@ -34,12 +36,43 @@ public class ProductController {
         return url;
     }
 
+    @RequestMapping(value = "/search",
+            method = RequestMethod.POST)
+    public String searchProducts(ModelMap model,
+                                 @RequestParam("inputNameProduct") String nameProduct,
+                                 @RequestParam("selectCategoryId") Long categoryId,
+                                 HttpServletRequest request) {
+
+        try {
+            request.setCharacterEncoding("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        System.out.println("wtf : " + nameProduct + " : " + categoryId);
+        System.out.println("wtf : " + request.getParameter("inputNameProduct") + " : " + request.getParameter("selectCategoryId"));
+
+        List<ProductEntity> products;
+        if (categoryId < 1) {
+            products = new ProductDAO().getProductsByName(nameProduct);
+        } else {
+            CategoryEntity category = new CategoryDAO().getCategoryById(categoryId);
+            products = new ProductDAO().getProductsByNameAndCategory(nameProduct, category);
+            model.addAttribute("category", category);
+        }
+        model.addAttribute("products", products);
+
+        String url = "products";
+        log.info("url -> " + url);
+        return url;
+    }
+
+
     @RequestMapping(value = "/category",
             method = RequestMethod.GET)
     public String getProductsByCategory(ModelMap model,
-                                        @RequestParam("category") Long category_id) {
+                                        @RequestParam("category") Long categoryId) {
 
-        CategoryEntity category = new CategoryDAO().getCategoryById(category_id);
+        CategoryEntity category = new CategoryDAO().getCategoryById(categoryId);
         List<ProductEntity> products = new ProductDAO().getProductsByCategory(category);
         model.addAttribute("category", category);
         model.addAttribute("products", products);
@@ -52,10 +85,10 @@ public class ProductController {
     @RequestMapping(value = "/subCategory",
             method = RequestMethod.GET)
     public String getProductsBySubCategory(ModelMap model,
-                                           @RequestParam("category") Long category_id,
-                                           @RequestParam("subCategory") Long subCategory_id) {
-        CategoryEntity category = new CategoryDAO().getCategoryById(category_id);
-        SubCategoryEntity subCategory = new SubCategoryDAO().getSubCategoryById(subCategory_id);
+                                           @RequestParam("category") Long categoryId,
+                                           @RequestParam("subCategory") Long subCategoryId) {
+        CategoryEntity category = new CategoryDAO().getCategoryById(categoryId);
+        SubCategoryEntity subCategory = new SubCategoryDAO().getSubCategoryById(subCategoryId);
         List<ProductEntity> products = new ProductDAO().getProductsBySubCategory(subCategory);
         model.addAttribute("category", category);
         model.addAttribute("subCategory", subCategory);

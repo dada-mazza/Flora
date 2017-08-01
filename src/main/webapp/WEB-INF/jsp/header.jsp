@@ -63,16 +63,19 @@
                 <a class="brand" href="/">
                     <img src="../../themes/images/logo/logo.png" alt="Flora"/>
                 </a>
-                <form class="form-inline navbar-search" method="post" action="products">
-                    <input id="srchFld" class="srchTxt" type="text"/>
-                    <select class="srchTxt">
-                        <option>All</option>
-                        <option>CATEGORY</option>
-                        <option>CATEGORY</option>
-                        <option>CATEGORY</option>
+
+                <jsp:include page="/categories"/>
+                <form class="form-inline navbar-search" method="post" action="/products/search">
+                    <input id="srchFld" class="srchTxt" name="inputNameProduct" type="text"/>
+                    <select class="srchTxt" name="selectCategoryId">
+                        <option value="0">All</option>
+                        <c:forEach var="category" items="${categories}">
+                            <option value="${category.id}">${category.name}</option>
+                        </c:forEach>
                     </select>
                     <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                 </form>
+
                 <ul id="topMenu" class="nav pull-right">
                     <li class=""><a href="special_offer">Specials Offer</a></li>
                     <li class=""><a href="normal">Delivery</a></li>

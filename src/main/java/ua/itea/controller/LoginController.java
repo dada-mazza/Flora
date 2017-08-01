@@ -43,6 +43,7 @@ public class LoginController {
                           @RequestParam("submit") String submit,
                           @RequestParam("inputEmailLogin") String email,
                           @RequestParam("inputPasswordLogin") String password) {
+
         log.info("submit : " + submit);
         if (StringUtils.equals(submit, "Sign In")) {
             String md5Password = MD5Util.md5Apache(password);

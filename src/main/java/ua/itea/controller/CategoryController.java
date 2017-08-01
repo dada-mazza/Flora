@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import ua.itea.dao.jpa.CategoryDAO;
 import ua.itea.entity.CategoryEntity;
@@ -22,7 +23,8 @@ public class CategoryController {
     protected Log log = LogFactory.getLog(getClass());
 
     @RequestMapping(method = {RequestMethod.GET, RequestMethod.POST})
-    public String doGet(ModelMap model) {
+    @ResponseBody
+    public void doGet(ModelMap model) {
 
         List<CategoryEntity> categories = (List<CategoryEntity>) model.get("categories");
 
@@ -31,8 +33,5 @@ public class CategoryController {
             model.addAttribute("categories", categories);
         }
 
-        String url = "categories";
-        log.info("url -> " + url);
-        return url;
     }
 }

@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 @WebFilter(
-        urlPatterns = "/",
+        urlPatterns = "/*",
         filterName = "LogFilter",
         description = "Filter for query logging (all URLs)"
 )
@@ -28,7 +28,7 @@ public class LogFilter implements Filter {
         log.info("doFilter");
 
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-
+        httpServletRequest.setCharacterEncoding("UTF-8");
         log.info("ip : " + httpServletRequest.getRemoteAddr());
         log.info("url : " + httpServletRequest.getRequestURI());
         log.info("method : " + httpServletRequest.getMethod());
