@@ -24,6 +24,12 @@ import javax.persistence.*;
                 query = "select products from ProductEntity products" +
                         " where products.category = :category" +
                         " and lower(products.name) like concat(concat('%',lower(:productName)),'%')"),
+        @NamedQuery(name = "ProductEntity.getNumberOfItemsInCategory",
+                query = "select count(products) from ProductEntity products" +
+                        " where products.category = :category"),
+        @NamedQuery(name = "ProductEntity.getNumberOfItemsInSubCategory",
+                query = "select count(products) from ProductEntity products" +
+                        " where products.subCategory = :subCategory")
 })
 
 public class ProductEntity implements FloraEntity {

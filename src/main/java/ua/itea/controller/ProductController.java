@@ -48,8 +48,6 @@ public class ProductController {
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
-        System.out.println("wtf : " + nameProduct + " : " + categoryId);
-        System.out.println("wtf : " + request.getParameter("inputNameProduct") + " : " + request.getParameter("selectCategoryId"));
 
         List<ProductEntity> products;
         if (categoryId < 1) {

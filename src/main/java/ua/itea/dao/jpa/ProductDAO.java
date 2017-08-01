@@ -56,4 +56,20 @@ public class ProductDAO extends AbstractDAO<ProductEntity> {
                 .getResultList();
         return result;
     }
+
+    public Long getNumberOfItemsInCategory(CategoryEntity category) {
+        Long result = getEntityManager()
+                .createNamedQuery("ProductEntity.getNumberOfItemsInCategory", Long.class)
+                .setParameter("category", category)
+                .getSingleResult();
+        return result;
+    }
+
+    public Long getNumberOfItemsInSubCategory(SubCategoryEntity subCategory) {
+        Long result = getEntityManager()
+                .createNamedQuery("ProductEntity.getNumberOfItemsInSubCategory", Long.class)
+                .setParameter("subCategory", subCategory)
+                .getSingleResult();
+        return result;
+    }
 }

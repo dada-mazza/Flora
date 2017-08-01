@@ -1,6 +1,7 @@
 package ua.itea.entity;
 
 import lombok.Data;
+import ua.itea.dao.jpa.ProductDAO;
 
 import javax.persistence.*;
 import java.util.List;
@@ -24,5 +25,14 @@ public class CategoryEntity implements FloraEntity {
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "category", targetEntity = SubCategoryEntity.class)
     private List<SubCategoryEntity> subCategories;
+
+    private Long numberOfItems;
+
+    public Long getNumberOfItems() {
+        if (numberOfItems == null) {
+            numberOfItems = new ProductDAO().getNumberOfItemsInCategory(this);
+        }
+        return numberOfItems;
+    }
 
 }

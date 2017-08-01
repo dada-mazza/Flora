@@ -1,7 +1,7 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
-<div id="sidebar" class="span3">
+<sidebar id="sidebar" class="span3">
     <div class="well well-small">
         <a id="myCart" href="/shoppingCart">
             <img src="../../themes/images/ico-cart.png" alt="cart">
@@ -27,17 +27,17 @@
 
         <c:forEach var="category" items="${categories}">
             <li class="subMenu">
-                <a> ${category.name} [{999}]</a>
+                <a> ${category.name} [${category.numberOfItems}]</a>
                 <ul class="hide">
                     <li>
                         <a class="active" href="/products/category?category=${category.id}">
-                            <i class="icon-chevron-right"></i>All ({999})
+                            <i class="icon-chevron-right"></i>All (${category.numberOfItems})
                         </a>
                     </li>
                     <c:forEach var="subCategory" items="${category.subCategories}">
                         <li>
                             <a href="/products/subCategory?category=${category.id}&subCategory=${subCategory.id}">
-                                <i class="icon-chevron-right"></i>${subCategory.name} ({999})
+                                <i class="icon-chevron-right"></i>${subCategory.name} (${subCategory.numberOfItems})
                             </a>
                         </li>
                     </c:forEach>
@@ -79,4 +79,4 @@
             <h5>Payment Methods</h5>
         </div>
     </div>
-</div>
+</sidebar>
