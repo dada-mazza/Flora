@@ -89,7 +89,7 @@ public class PersonalDataController {
                 if (user != null) {
                     log.info("Personal data has bean changed: " + user);
                     session.setAttribute("user", user);
-                    String url = "/profile";
+                    String url = "profile";
                     log.info("url -> " + url);
                     return url;
                 } else {
@@ -106,7 +106,7 @@ public class PersonalDataController {
             }
         }
 
-        String url = "/personalData";
+        String url = "profile";
         log.info("url -> " + url);
         return url;
     }

@@ -358,4 +358,9 @@ public class Validator {
                 && getPhoneNumberErrorMessages().isEmpty()
                 && getAdditionalInformationErrorMessages().isEmpty();
     }
+
+    public boolean isValidPassword() {
+        return getPasswordErrorMessages().isEmpty()
+                && getConfirmPasswordErrorMessages().isEmpty();
+    }
 }

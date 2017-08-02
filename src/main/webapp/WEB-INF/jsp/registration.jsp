@@ -46,20 +46,20 @@
                     <form class="form-horizontal" action="/registration" method="post">
                         <h4>Your personal information</h4>
 
-                        <%-- password --%>
+                        <%-- email --%>
                         <div class="control-group">
                             <label class="control-label" for="inputEmail">Email <sup>*</sup></label>
                             <div class="controls">
                                 <input type="email" name="inputEmail" id="inputEmail" placeholder="Email" required
-                                <c:choose>
-                                <c:when test="${not empty email}">
-                                       value="${email}"
-                                </c:when>
-                                <c:otherwise>
-                                       value="${param.inputEmail}"
-                                </c:otherwise>
-                                </c:choose>
-                                >
+                                        <c:choose>
+                                            <c:when test="${not empty email}">
+                                                value="${email}"
+                                            </c:when>
+                                            <c:otherwise>
+                                                value="${param.inputEmail}"
+                                            </c:otherwise>
+                                        </c:choose>
+                                />
                             </div>
                         </div>
 
@@ -80,7 +80,8 @@
                             <div class="controls">
                                 <input type="password" name="inputPassword" id="inputPassword" placeholder="Password"
                                        required
-                                       value="${param.inputPassword}">
+                                       value="${param.inputPassword}"
+                                />
                             </div>
                         </div>
 
@@ -101,7 +102,8 @@
                                 <sup>*</sup></label>
                             <div class="controls">
                                 <input type="password" name="inputConfirmPassword" id="inputConfirmPassword"
-                                       placeholder="Confirm Password" required value="${param.inputConfirmPassword}">
+                                       placeholder="Confirm Password" required value="${param.inputConfirmPassword}"
+                                />
                             </div>
                         </div>
 
@@ -121,7 +123,8 @@
                             <label class="control-label" for="inputFirstName">First name <sup>*</sup></label>
                             <div class="controls">
                                 <input type="text" name="inputFirstName" id="inputFirstName"
-                                       placeholder="First Name" required value="${param.inputFirstName}">
+                                       placeholder="First Name" required value="${param.inputFirstName}"
+                                />
                             </div>
                         </div>
 
@@ -141,7 +144,8 @@
                             <label class="control-label" for="inputLastName">Last name <sup>*</sup></label>
                             <div class="controls">
                                 <input type="text" name="inputLastName" id="inputLastName"
-                                       placeholder="Last Name" required value="${param.inputLastName}">
+                                       placeholder="Last Name" required value="${param.inputLastName}"
+                                />
                             </div>
                         </div>
 
@@ -252,7 +256,8 @@
                             <label class="control-label" for="inputAddress">Address<sup>*</sup></label>
                             <div class="controls">
                                 <input type="text" name="inputAddress" id="inputAddress"
-                                       placeholder="Adress" required value="${param.inputAddress}">
+                                       placeholder="Adress" required value="${param.inputAddress}"
+                                />
                                 <span>Apartment, building, street address</span>
                             </div>
                         </div>
@@ -273,7 +278,8 @@
                             <label class="control-label" for="inputCity">City <sup>*</sup></label>
                             <div class="controls">
                                 <input type="text" name="inputCity" id="inputCity" placeholder="City" required
-                                       value="${param.inputCity}">
+                                       value="${param.inputCity}"
+                                />
                             </div>
                         </div>
 
@@ -293,7 +299,8 @@
                             <label class="control-label" for="inputPhoneNumber">Phone <sup>*</sup></label>
                             <div class="controls">
                                 <input type="text" name="inputPhoneNumber" id="inputPhoneNumber"
-                                       placeholder="Phone" required value="${param.inputPhoneNumber}"/>
+                                       placeholder="Phone" required value="${param.inputPhoneNumber}"
+                                />
                             </div>
                         </div>
 
@@ -339,7 +346,6 @@
 
                         <div class="control-group">
                             <div class="controls">
-                                <input type="hidden" name="email">
                                 <input class="btn btn-large btn-success" type="submit" name="submit"
                                        value="Register"/>
                             </div>

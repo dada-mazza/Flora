@@ -365,7 +365,6 @@
 
                         <div class="control-group">
                             <div class="controls">
-                                <input type="hidden" name="email">
                                 <input class="btn btn-large btn-success" type="submit" name="submit"
                                        value="Edit"/>
                             </div>

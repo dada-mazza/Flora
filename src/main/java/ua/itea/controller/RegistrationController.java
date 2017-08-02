@@ -40,7 +40,7 @@ public class RegistrationController extends UnauthenticatedAbstractController {
             if (validator.isValidEmail()) {
                 log.info("Email is valid : " + email);
                 model.addAttribute("email", email);
-                String url = "/registration";
+                String url = "registration";
                 log.info("url -> " + url);
                 return url;
             } else {
@@ -48,7 +48,7 @@ public class RegistrationController extends UnauthenticatedAbstractController {
                 model.addAttribute("validator", validator);
             }
         }
-        String url = "/login";
+        String url = "login";
         log.info("url -> " + url);
         return url;
     }
@@ -120,13 +120,13 @@ public class RegistrationController extends UnauthenticatedAbstractController {
             } else {
                 log.info("User has not bean registered : " + email);
                 model.addAttribute("validator", validator);
-                String url = "/registration";
+                String url = "registration";
                 log.info("url -> " + url);
                 return url;
             }
         }
 
-        String url = "/registration";
+        String url = "registration";
         log.info("url -> " + url);
         return url;
     }
