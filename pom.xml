@@ -26,7 +26,6 @@
         <joda-time.version>2.9.9</joda-time.version>
         <junit.version>4.12</junit.version>
         <spring.version>4.3.10.RELEASE</spring.version>
-        <tomcat-dbcp.version>9.0.0.M21</tomcat-dbcp.version>
 
     </properties>
 
@@ -104,18 +103,19 @@
             <version>${hibernate.version}</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-c3p0 -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-c3p0</artifactId>
+            <version>${hibernate.version}</version>
+        </dependency>
+
+
         <!-- https://mvnrepository.com/artifact/org.springframework/spring-webmvc -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
-        </dependency>
-
-        <!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-dbcp -->
-        <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-dbcp</artifactId>
-            <version>9.0.0.M22</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.json/json -->
