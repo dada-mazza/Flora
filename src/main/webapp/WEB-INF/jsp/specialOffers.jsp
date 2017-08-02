@@ -72,7 +72,8 @@
                                                     </div>
                                                 </i>
                                                 </a>
-                                                <a class="btn btn-primary" href="/shoppingCart?productId=${product.id}">
+                                                <a class="btn btn-primary"
+                                                   href="/shoppingCart/product?productId=${product.id}">
                                                     &#8372 ${product.price / 100}
                                                 </a>
                                             </h4>

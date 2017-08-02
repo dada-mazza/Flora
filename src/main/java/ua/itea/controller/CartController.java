@@ -4,26 +4,25 @@ package ua.itea.controller;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.JSONObject;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import ua.itea.entity.Cart;
 import ua.itea.entity.ProductEntity;
 
+import javax.servlet.http.HttpSession;
+
 @RestController
 @RequestMapping("/addProductToCart")
-@SessionAttributes("cart")
 public class CartController {
 
     protected Log log = LogFactory.getLog(getClass());
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public String addProductToCart(ModelMap model,
-                                   @RequestParam("product") String json) {
+    public String addProductToCart(
+            @RequestParam("product") String json,
+            HttpSession session) {
 
-        log.info("jsonRequest : " + json);
-
-        Cart cart = (Cart) model.get("cart");
+        Cart cart = (Cart) session.getAttribute("cart");
         if (cart == null) {
             cart = new Cart();
         }
@@ -42,7 +41,7 @@ public class CartController {
             cart.getProducts().add(product);
         }
 
-        model.addAttribute("cart", cart);
+        session.setAttribute("cart", cart);
 
         JSONObject response = new JSONObject();
         response.put("totalItems", cart.getTotalItems());
@@ -52,7 +51,5 @@ public class CartController {
 
         return response.toString();
     }
-
-
 }
 
