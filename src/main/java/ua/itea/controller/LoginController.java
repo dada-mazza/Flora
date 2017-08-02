@@ -9,40 +9,24 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import ua.itea.dao.jpa.UserDAO;
 import ua.itea.entity.UserEntity;
 import ua.itea.md5.MD5Util;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/login")
-@SessionAttributes("user")
-public class LoginController {
+public class LoginController extends UnauthenticatedAbstractController {
 
     protected Log log = LogFactory.getLog(getClass());
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String doGet(ModelMap model) {
-
-        UserEntity user = (UserEntity) model.get("user");
-
-        if (user != null) {
-            String url = "main";
-            log.info("url -> " + url);
-            return url;
-        }
-
-        String url = "login";
-        log.info("url -> " + url);
-        return "login";
-    }
-
-
     @RequestMapping(method = RequestMethod.POST)
-    private String doPost(ModelMap model,
-                          @RequestParam("submit") String submit,
-                          @RequestParam("inputEmailLogin") String email,
-                          @RequestParam("inputPasswordLogin") String password) {
+    private String authentication(@RequestParam("submit") String submit,
+                                  @RequestParam("inputEmailLogin") String email,
+                                  @RequestParam("inputPasswordLogin") String password,
+                                  ModelMap model,
+                                  HttpSession session) {
 
         log.info("submit : " + submit);
         if (StringUtils.equals(submit, "Sign In")) {
@@ -53,7 +37,7 @@ public class LoginController {
                     && email.equals(user.getEmail())
                     && md5Password.equals(user.getPassword())) {
                 log.info("access granted for " + email);
-                model.addAttribute("user", user);
+                session.setAttribute("user", user);
                 String url = "/main";
                 log.info("url -> " + url);
                 return url;

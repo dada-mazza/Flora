@@ -50,10 +50,15 @@
 
                             <li class="nav-header">Profile</li>
                             <li>
-
                                 <a href="/personalData">
                                     <i class="icon-user"></i>
                                     Personal Data
+                                </a>
+                            </li>
+                            <li>
+                                <a href="/changePassword">
+                                    <i class="icon-lock"></i>
+                                    Change Password
                                 </a>
                             </li>
                             <li>

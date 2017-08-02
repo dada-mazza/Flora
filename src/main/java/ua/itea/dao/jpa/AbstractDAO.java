@@ -55,10 +55,11 @@ abstract class AbstractDAO<E extends FloraEntity> implements DAO<E> {
 
     @Override
     public E update(E entity) {
+        E result = null;
         getEntityTransaction().begin();
-        getEntityManager().merge(entity);
+        result = getEntityManager().merge(entity);
         getEntityTransaction().commit();
-        return entity;
+        return result;
     }
 
     @Override

@@ -347,4 +347,15 @@ public class Validator {
                 && getPhoneNumberErrorMessages().isEmpty()
                 && getAdditionalInformationErrorMessages().isEmpty();
     }
+
+    public boolean isValidPersonalData() {
+        return getFirstNameErrorMessages().isEmpty()
+                && getLastNameErrorMessages().isEmpty()
+                && getDateOfBirthErrorMessages().isEmpty()
+                && getGenderErrorMessages().isEmpty()
+                && getAddressErrorMessages().isEmpty()
+                && getCityErrorMessages().isEmpty()
+                && getPhoneNumberErrorMessages().isEmpty()
+                && getAdditionalInformationErrorMessages().isEmpty();
+    }
 }

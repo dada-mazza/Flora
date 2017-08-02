@@ -14,51 +14,35 @@ import ua.itea.dao.jpa.UserDAO;
 import ua.itea.entity.UserEntity;
 import ua.itea.entity.enumeratiom.Gender;
 import ua.itea.entity.enumeratiom.Role;
-import ua.itea.md5.MD5Util;
 import ua.itea.validator.Validator;
 
 import javax.servlet.http.HttpSession;
 import java.sql.Date;
 
+
 @Controller
-@RequestMapping("/registration")
-public class RegistrationController extends UnauthenticatedAbstractController {
+@RequestMapping("/personalData")
+public class PersonalDataController {
 
     protected Log log = LogFactory.getLog(getClass());
 
-    @RequestMapping(value = "/email",
-            method = RequestMethod.POST)
-    private String registrationEmail(@RequestParam("submit") String submit,
-                                     @RequestParam("inputEmailRegistration") String email,
-                                     ModelMap model,
-                                     HttpSession session
-    ) {
-        log.info("submit : " + submit);
-        if (StringUtils.equals(submit, "Sign Up Email")) {
-            Validator validator = new Validator();
-            validator.setEmail(email);
-            if (validator.isValidEmail()) {
-                log.info("Email is valid : " + email);
-                model.addAttribute("email", email);
-                String url = "/registration";
-                log.info("url -> " + url);
-                return url;
-            } else {
-                log.info("Email is not valid : " + email);
-                model.addAttribute("validator", validator);
-            }
+    @RequestMapping(method = RequestMethod.GET)
+    public String service(HttpSession session) {
+
+        UserEntity user = (UserEntity) session.getAttribute("user");
+        String url;
+        if (user == null) {
+            url = "login";
+        } else {
+            url = "personalData";
         }
-        String url = "/login";
+
         log.info("url -> " + url);
         return url;
     }
 
-
     @RequestMapping(method = RequestMethod.POST)
-    private String registrationUser(@RequestParam("submit") String submit,
-                                    @RequestParam("inputEmail") String email,
-                                    @RequestParam("inputPassword") String password,
-                                    @RequestParam("inputConfirmPassword") String confirmPassword,
+    private String editPersonalData(@RequestParam("submit") String submit,
                                     @RequestParam("inputFirstName") String firstName,
                                     @RequestParam("inputLastName") String lastName,
                                     @RequestParam("selectYear") String yearOfBirth,
@@ -73,11 +57,8 @@ public class RegistrationController extends UnauthenticatedAbstractController {
                                     HttpSession session
     ) {
         log.info("submit : " + submit);
-        if (StringUtils.equals(submit, "Register")) {
+        if (StringUtils.equals(submit, "Edit")) {
             Validator validator = new Validator();
-            validator.setEmail(email);
-            validator.setPassword(password);
-            validator.setConfirmPassword(confirmPassword);
             validator.setFirstName(firstName);
             validator.setLastName(lastName);
             validator.setYearOfBirth(yearOfBirth);
@@ -89,10 +70,9 @@ public class RegistrationController extends UnauthenticatedAbstractController {
             validator.setPhoneNumber(phoneNumber);
             validator.setAdditionalInformation(additionalInformation);
 
-            if (validator.isValid()) {
-                UserEntity user = new UserEntity();
-                user.setEmail(email);
-                user.setPassword(MD5Util.md5Apache(password));
+            UserEntity user = (UserEntity) session.getAttribute("user");
+
+            if (validator.isValidPersonalData()) {
                 user.setFirstName(firstName);
                 user.setLastName(lastName);
                 DateTime dateTime = new DateTime(Integer.parseInt(yearOfBirth), Integer.parseInt(monthOfBirth), Integer.parseInt(dayOfBirth), 0, 0);
@@ -104,30 +84,31 @@ public class RegistrationController extends UnauthenticatedAbstractController {
                 user.setAdditionalInformation(additionalInformation);
                 user.setRole(Role.USER);
 
-                user.setId(new UserDAO().create(user));
+                user = new UserDAO().update(user);
 
-                if (user.getId() != null) {
-                    log.info("User has bean registered : " + email);
+                if (user != null) {
+                    log.info("Personal data has bean changed: " + user);
                     session.setAttribute("user", user);
-                    String url = "/";
+                    String url = "/profile";
                     log.info("url -> " + url);
                     return url;
                 } else {
-                    log.info("registration error for " + email);
-                    model.addAttribute("errorMessage", "Registration error. Try later!");
+                    log.info("editing error for " + user);
+                    model.addAttribute("errorMessage", "Editing error. Try later!");
                 }
 
             } else {
-                log.info("User has not bean registered : " + email);
+                log.info("Personal data has not bean changed : " + user);
                 model.addAttribute("validator", validator);
-                String url = "/registration";
+                String url = "personalData";
                 log.info("url -> " + url);
                 return url;
             }
         }
 
-        String url = "/registration";
+        String url = "/personalData";
         log.info("url -> " + url);
         return url;
     }
+
 }
