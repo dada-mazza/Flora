@@ -78,7 +78,7 @@
                     <div class="span4">
                         <div class="well">
                             <h5>ALREADY REGISTERED ?</h5>
-                            <form action="/login" method="post">
+                            <form action="/login/main" method="post">
                                 <div class="control-group">
                                     <label class="control-label" for="inputEmailLogin">Email</label>
                                     <div class="controls">

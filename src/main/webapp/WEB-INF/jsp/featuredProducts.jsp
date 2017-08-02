@@ -17,7 +17,7 @@
                                         <div class="thumbnail">
                                             <i class="tag"></i>
                                             <a href="/product_details?productId={product.id}">
-                                                <img src="themes/images/example/products/b${img}.png" alt="">
+                                                <img src="/themes/images/example/products/b${img}.png" alt="">
                                             </a>
                                             <div class="caption">
                                                 <h5>Product name</h5>
@@ -46,7 +46,7 @@
             <li class="span3">
                 <div class="thumbnail">
                     <a href="/product_details?productId={product.id}">
-                        <img src="themes/images/example/products/f${img}.jpg" alt=""/>
+                        <img src="/themes/images/example/products/f${img}.jpg" alt=""/>
                     </a>
                     <div class="caption">
                         <h5>Product name</h5>

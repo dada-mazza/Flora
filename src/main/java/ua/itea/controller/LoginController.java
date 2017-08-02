@@ -6,6 +6,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,10 +22,11 @@ public class LoginController extends UnauthenticatedAbstractController {
 
     protected Log log = LogFactory.getLog(getClass());
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "/{backUrl}", method = RequestMethod.POST)
     private String authentication(@RequestParam("submit") String submit,
                                   @RequestParam("inputEmailLogin") String email,
                                   @RequestParam("inputPasswordLogin") String password,
+                                  @PathVariable String backUrl,
                                   ModelMap model,
                                   HttpSession session) {
 
@@ -38,7 +40,7 @@ public class LoginController extends UnauthenticatedAbstractController {
                     && md5Password.equals(user.getPassword())) {
                 log.info("access granted for " + email);
                 session.setAttribute("user", user);
-                String url = "/main";
+                String url = backUrl;
                 log.info("url -> " + url);
                 return url;
             } else {
@@ -51,4 +53,5 @@ public class LoginController extends UnauthenticatedAbstractController {
         log.info("url -> " + url);
         return url;
     }
+
 }

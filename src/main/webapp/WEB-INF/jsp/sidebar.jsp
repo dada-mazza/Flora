@@ -78,6 +78,7 @@
         </div>
     </div>
     <br/>
+
     <div class="thumbnail">
         <img src="../../themes/images/payment_methods.png" title="Flora Payment Methods"
              alt="Payments Methods">

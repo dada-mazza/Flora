@@ -8,7 +8,7 @@
         <div class="row">
 
             <!-- Sidebar =========================================================================================== -->
-            <jsp:include page="/categories"/>
+            <jsp:include page="sidebar.jsp"/>
             <!-- Sidebar end ======================================================================================= -->
             <div class="span9">
                 <ul class="breadcrumb">
@@ -35,7 +35,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <form class="form-horizontal" action="/login" method="post">
+                                <form class="form-horizontal" action="/login/shoppingCart" method="post">
                                     <div class="control-group">
                                         <label class="control-label" for="inputEmailLogin">Username</label>
                                         <div class="controls">
@@ -54,7 +54,7 @@
                                         <div class="controls">
                                             <input type="submit" class="btn" name="submit" value="Sign In"/>
                                             OR
-                                            <a href="/register" class="btn">Register Now!</a>
+                                            <a href="/registration" class="btn">Register Now!</a>
                                         </div>
                                     </div>
                                     <div class="control-group">
@@ -78,58 +78,66 @@
                             <th>Description</th>
                             <th>Quantity/Update</th>
                             <th>Price</th>
-                            <th>Discount</th>
-                            <th>Tax</th>
+                            <th>Discount, %</th>
                             <th>Total</th>
                         </tr>
                         </thead>
                         <tbody>
                         <c:forEach var="product" items="${cart.products}">
                             <tr>
-                                <td><img width="60" src="themes/images/products/${product.id}.jpg" alt=""/></td>
+                                <td><img width="60" src="/themes/images/products/${product.id}.jpg" alt=""/></td>
                                 <td>${product.name}</td>
                                 <td>
                                     <div class="input-append">
-                                        <input class="span1"
+                                        <input class="span1 productQuantity"
                                                style="max-width:34px"
                                                placeholder="1"
-                                               id="appendedInputButtons"
+                                               id="inputQuantity"
                                                size="16"
                                                type="text"
                                                value="${product.quantity}"
                                         />
-                                        <button class="btn" type="button"><i class="icon-minus"></i></button>
-                                        <button class="btn" type="button"><i class="icon-plus"></i></button>
+                                        <button class="btn" type="button">
+                                            <i class="icon-minus"></i>
+                                        </button>
+                                        <button class="btn" type="button">
+                                            <i class="icon-plus"></i>
+                                        </button>
                                         <button class="btn btn-danger" type="button">
                                             <i class="icon-remove icon-white"></i>
                                         </button>
                                     </div>
                                 </td>
-                                <td> &#8372 ${product.price / 100}</td>
-                                <td> &#8372 0.00</td>
-                                <td> &#8372 0.00</td>
-                                <td> ${product.price * product.quantity / 100}</td>
+                                <td class="productPrice">${product.price / 100}</td>
+                                <td class="productDiscount">0</td>
+                                <td class="productTotalAmount">${product.price * product.quantity / 100}</span>
+                                </td>
                             </tr>
                         </c:forEach>
 
                         <tr>
-                            <td colspan="6" style="text-align:right">Total Price:</td>
-                            <td> &#8372 ${cart.totalAmount / 100} </td>
+                            <td colspan="5" style="text-align:right">Total Amount:</td>
+                            <td> &#8372 <span id="productsTotalAmount">${cart.totalAmount / 100}</span></td>
                         </tr>
                         <tr>
-                            <td colspan="6" style="text-align:right">Total Discount:</td>
-                            <td> &#8372 0.00</td>
+                            <td colspan="5" style="text-align:right">Delivery:</td>
+                            <td> &#8372 <span id="cartDelivery">
+                                <c:choose>
+                                    <c:when test="${cart.totalAmount > 100000}">
+                                        0.00
+                                    </c:when>
+                                    <c:otherwise>
+                                        50.0
+                                    </c:otherwise>
+                                </c:choose>
+                              </span></td>
                         </tr>
                         <tr>
-                            <td colspan="6" style="text-align:right">Total Tax:</td>
-                            <td> &#8372 0.00</td>
-                        </tr>
-                        <tr>
-                            <td colspan="6" style="text-align:right">
+                            <td colspan="5" style="text-align:right">
                                 <strong>TOTAL</strong>
                             </td>
                             <td class="label label-important" style="display:block">
-                                <strong> &#8372 ${cart.totalAmount / 100} </strong>
+                                <strong> &#8372 <span id="cartTotalAmount">${cart.totalAmount / 100}</span></strong>
                             </td>
                         </tr>
                         </tbody>
@@ -193,3 +201,4 @@
 <!-- MainBody End ================================================================================================== -->
 <!-- Footer ======================================================================================================== -->
 <%@include file="footer.jsp" %>
+<script src="/themes/js/shoppingCart.js" type="text/javascript"></script>
