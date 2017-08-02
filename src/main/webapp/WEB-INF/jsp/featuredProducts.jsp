@@ -16,14 +16,14 @@
                                     <li class="span3">
                                         <div class="thumbnail">
                                             <i class="tag"></i>
-                                            <a href="/product_details?productId={product.id}">
+                                            <a href="/productDetails?productId={product.id}">
                                                 <img src="/themes/images/example/products/b${img}.png" alt="">
                                             </a>
                                             <div class="caption">
                                                 <h5>Product name</h5>
                                                 <h4>
                                                     <a class="btn"
-                                                       href="/product_details?productId={product.id}">VIEW</a>
+                                                       href="/productDetails?productId={product.id}">VIEW</a>
                                                     <span class="pull-right">$222.00</span>
                                                 </h4>
                                             </div>
@@ -45,7 +45,7 @@
         <c:forEach var="img" begin="1" end="12">
             <li class="span3">
                 <div class="thumbnail">
-                    <a href="/product_details?productId={product.id}">
+                    <a href="/productDetails?productId={product.id}">
                         <img src="/themes/images/example/products/f${img}.jpg" alt=""/>
                     </a>
                     <div class="caption">
@@ -54,7 +54,7 @@
                             Lorem Ipsum is simply dummy text.
                         </p>
                         <h4 style="text-align:center">
-                            <a class="btn" href="/product_details?productId={product.id}">
+                            <a class="btn" href="/productDetails?productId={product.id}">
                                 <i class="icon-zoom-in"></i>
                             </a>
                             <a class="btn" href="#">

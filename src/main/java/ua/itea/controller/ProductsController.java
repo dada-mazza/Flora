@@ -21,7 +21,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/products")
-public class ProductController {
+public class ProductsController {
 
     protected Log log = LogFactory.getLog(getClass());
 

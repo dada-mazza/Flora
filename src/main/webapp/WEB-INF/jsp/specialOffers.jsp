@@ -53,14 +53,14 @@
                             <c:forEach var="product" items="${offers}">
                                 <li class="span3">
                                     <div class="thumbnail">
-                                        <a href="/product_details?productId=${product.id}">
+                                        <a href="/productDetails?productId=${product.id}">
                                             <img src="/themes/images/products/${product.id}.png" alt="${product.name}"/>
                                         </a>
                                         <div class="caption">
                                             <h5>${product.name}</h5>
                                             <p>${product.name}</p>
                                             <h4 style="text-align:center">
-                                                <a class="btn" href="/product_details?productId=${product.id}">
+                                                <a class="btn" href="/productDetails?productId=${product.id}">
                                                     <i class="icon-zoom-in"></i>
                                                 </a>
                                                 <a class="btn" href="">
@@ -97,7 +97,7 @@
                                     <hr class="soft"/>
                                     <h5>${product.name}</h5>
                                     <p>${product.description}</p>
-                                    <a class="btn btn-small pull-right" href="/product_details?productId=${product.id}">View
+                                    <a class="btn btn-small pull-right" href="/productDetails?productId=${product.id}">View
                                         Details</a>
                                     <br class="clr"/>
                                 </div>
@@ -111,7 +111,7 @@
                                         <a href="" class="btn btn-large btn-primary">
                                             Add to <i class=" icon-shopping-cart"></i>
                                         </a>
-                                        <a href="/product_details?productId=${product.id}" class="btn btn-large">
+                                        <a href="/productDetails?productId=${product.id}" class="btn btn-large">
                                             <i class="icon-zoom-in"></i>
                                         </a>
                                     </form>

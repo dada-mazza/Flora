@@ -85,7 +85,7 @@
                         <tbody>
                         <c:forEach var="product" items="${cart.products}">
                             <tr>
-                                <td><img width="60" src="/themes/images/products/${product.id}.jpg" alt=""/></td>
+                                <td><img width="60" src="/themes/images/products/${product.id}.png" alt=""/></td>
                                 <td>${product.name}</td>
                                 <td>
                                     <div class="input-append">
