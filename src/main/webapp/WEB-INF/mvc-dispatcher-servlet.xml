@@ -10,6 +10,10 @@
     <context:component-scan base-package="ua.itea.controller"/>
 
     <bean name="/index" class="ua.itea.controller.MainController"/>
+    <bean name="/orders" class="ua.itea.controller.MainController"/>
+    <bean name="/wishList" class="ua.itea.controller.MainController"/>
+    <bean name="/settings" class="ua.itea.controller.MainController"/>
+    <bean name="/help" class="ua.itea.controller.MainController"/>
 
     <bean class=" org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix">
