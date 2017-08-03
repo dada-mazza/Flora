@@ -15,7 +15,7 @@ import java.util.List;
  */
 abstract class AbstractDAO<E extends FloraEntity> implements DAO<E> {
 
-    private final static String PERSISTENCE_UNIT_NAME = "entityManager";
+    private final static String PERSISTENCE_UNIT_NAME = "entityManagerHeroku";
     private static EntityManager entityManager = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME)
             .createEntityManager();
 
