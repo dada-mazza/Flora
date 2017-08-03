@@ -100,3 +100,19 @@ $(function () {
     });
 
 });
+
+/* search product */
+
+$(function () {
+
+    $('#srchFld').focus(function () {
+        $("#srchFld").css('background-image', 'none');
+    });
+
+    $('#srchFld').blur(function () {
+        if ($('#srchFld').val() === "") {
+            $("#srchFld").css('background', 'url(/themes/images/css/search.png) no-repeat 4px center #fff');
+        }
+    });
+
+});
