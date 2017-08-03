@@ -1,10 +1,14 @@
 $(function () {
 
     $('#sorting').change(function () {
-        var parameter = location.href.substring("?");
 
-        location = "/products/sort" + location.search + "&sort=" + $('#sorting').val();
+        var param = location.search;
+        var url = "/products/sort"
+            + param
+            + (param.indexOf("?") === -1 ? "?" : "&")
+            + "sort=" + $('#sorting').val();
 
+        location = url
     });
 
 });

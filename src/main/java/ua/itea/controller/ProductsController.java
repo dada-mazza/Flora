@@ -109,13 +109,8 @@ public class ProductsController {
         log.info("subCategoryId : " + subCategoryId);
         log.info("sort : " + sort);
 
+        List<ProductEntity> products = new ProductDAO().getAll();
 
-        CategoryEntity category = new CategoryDAO().getCategoryById(categoryId);
-        SubCategoryEntity subCategory = new SubCategoryDAO().getSubCategoryById(subCategoryId);
-        List<ProductEntity> products = new ProductDAO().getProductsBySubCategory(subCategory);
-
-        model.addAttribute("category", category);
-        model.addAttribute("subCategory", subCategory);
         model.addAttribute("products", products);
 
         String url = "products";
