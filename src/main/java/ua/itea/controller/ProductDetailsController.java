@@ -29,7 +29,7 @@ public class ProductDetailsController {
         if (product != null) {
             model.addAttribute("product", product);
             List<ProductEntity> relatedProducts = new ProductDAO().getAll();
-            model.addAttribute("relatedProducts", relatedProducts);
+            model.addAttribute("products", relatedProducts);
             url = "productDetails";
         } else {
             url = "redirect:/products";

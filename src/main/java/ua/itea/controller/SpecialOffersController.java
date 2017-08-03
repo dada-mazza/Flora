@@ -22,7 +22,7 @@ public class SpecialOffersController {
     public String getAllOffers(ModelMap model) {
 
         List<ProductEntity> offers = new ProductDAO().getAll();
-        model.addAttribute("offers", offers);
+        model.addAttribute("products", offers);
 
         String url = "specialOffers";
         log.info("url -> " + url);
