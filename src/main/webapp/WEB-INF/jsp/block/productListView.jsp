@@ -23,7 +23,7 @@
                     <input type="checkbox"> Adds product to compair
                 </label>
                 <br/>
-                <a href="/shoppingCart/product?productId=${product.id}"
+                <a href="/shoppingCart/addProduct?productId=${product.id}"
                    class="btn btn-large btn-primary">
                     Add to <i class=" icon-shopping-cart"></i>
                 </a>

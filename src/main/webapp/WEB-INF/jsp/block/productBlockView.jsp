@@ -24,7 +24,7 @@
                     </i>
                     </a>
                     <a class="btn btn-primary"
-                       href="/shoppingCart/product?productId=${product.id}">
+                       href="/shoppingCart/addProduct?productId=${product.id}">
                         &#8372 ${product.price / 100}
                     </a>
                 </h4>

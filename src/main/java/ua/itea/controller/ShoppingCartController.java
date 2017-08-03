@@ -27,9 +27,9 @@ public class ShoppingCartController {
         return url;
     }
 
-    @RequestMapping(value = "/product", method = RequestMethod.GET)
-    public String openCart(@RequestParam("productId") Long productId,
-                           HttpSession session) {
+    @RequestMapping(value = "/addProduct", method = RequestMethod.GET)
+    public String addProduct(@RequestParam("productId") Long productId,
+                             HttpSession session) {
 
         Cart cart = (Cart) session.getAttribute("cart");
         if (cart == null) {
@@ -52,4 +52,36 @@ public class ShoppingCartController {
         log.info("url -> " + url);
         return url;
     }
+
+    @RequestMapping(value = "/addProductWithQuantity", method = RequestMethod.POST)
+    public String addProductWithQuantity(@RequestParam("inputProductId") Long productId,
+                                         @RequestParam("inputProductQuantity") Integer productQuantity,
+                                         HttpSession session) {
+
+        Cart cart = (Cart) session.getAttribute("cart");
+        if (cart == null) {
+            cart = new Cart();
+        }
+
+        if (productQuantity == null || productQuantity < 1) {
+            productQuantity = 1;
+        }
+
+        ProductEntity product = new ProductDAO().getProductById(productId);
+
+        if (product != null && cart.getProducts().contains(product)) {
+            product = cart.getProducts().get(cart.getProducts().indexOf(product));
+            product.setQuantity(product.getQuantity() + productQuantity);
+        } else if (product != null) {
+            product.setQuantity(productQuantity);
+            cart.getProducts().add(product);
+        }
+
+        session.setAttribute("cart", cart);
+
+        String url = "shoppingCart";
+        log.info("url -> " + url);
+        return url;
+    }
 }
+

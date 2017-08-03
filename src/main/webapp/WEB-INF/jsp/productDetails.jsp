@@ -75,11 +75,13 @@
                         <h3>${product.name}</h3>
                         <small>${product.name}</small>
                         <hr class="soft"/>
-                        <form class="form-horizontal qtyFrm">
+                        <form class="form-horizontal qtyFrm" action="/shoppingCart/addProductWithQuantity"
+                              method="post">
                             <div class="control-group">
                                 <label class="control-label">&#8372 <span>${product.price / 100}</span></label>
                                 <div class="controls">
-                                    <input type="number" class="span1" placeholder="Qty."/>
+                                    <input type="hidden" name="inputProductId" value="${product.id}"/>
+                                    <input type="number" name="inputProductQuantity" class="span1" placeholder="Qty."/>
                                     <button type="submit" class="btn btn-large btn-primary pull-right">
                                         Add to cart <i class=" icon-shopping-cart"></i>
                                     </button>
