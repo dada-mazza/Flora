@@ -29,11 +29,11 @@
                 <form class="form-horizontal span6">
                     <div class="control-group">
                         <label class="control-label alignL">Sort By </label>
-                        <select>
-                            <option>Product name A - Z</option>
-                            <option>Product name Z - A</option>
-                            <option>Price Biggest first</option>
-                            <option>Price Lowest first</option>
+                        <select id="sorting">
+                            <option value="1">Product name A - Z</option>
+                            <option value="2">Product name Z - A</option>
+                            <option value="3">Price Biggest first</option>
+                            <option value="4">Price Lowest first</option>
                         </select>
                     </div>
                 </form>
@@ -86,3 +86,4 @@
 <!-- MainBody End ================================================================================================== -->
 <!-- Footer ======================================================================================================== -->
 <%@include file="footer.jsp" %>
+<script src="/themes/js/product.js" type="text/javascript"></script>

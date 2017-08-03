@@ -96,5 +96,31 @@ public class ProductsController {
         log.info("url -> " + url);
         return url;
     }
+
+
+    @RequestMapping(value = "/sort",
+            method = RequestMethod.GET)
+    public String getProductsBySubCategory(@RequestParam(required = false, name = "category") Long categoryId,
+                                           @RequestParam(required = false, name = "subCategory") Long subCategoryId,
+                                           @RequestParam(required = false, name = "sort") Integer sort,
+                                           ModelMap model) {
+
+        log.info("categoryId : " + categoryId);
+        log.info("subCategoryId : " + subCategoryId);
+        log.info("sort : " + sort);
+
+
+        CategoryEntity category = new CategoryDAO().getCategoryById(categoryId);
+        SubCategoryEntity subCategory = new SubCategoryDAO().getSubCategoryById(subCategoryId);
+        List<ProductEntity> products = new ProductDAO().getProductsBySubCategory(subCategory);
+
+        model.addAttribute("category", category);
+        model.addAttribute("subCategory", subCategory);
+        model.addAttribute("products", products);
+
+        String url = "products";
+        log.info("url -> " + url);
+        return url;
+    }
 }
 
