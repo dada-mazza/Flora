@@ -18,6 +18,13 @@ $(function () {
                 remove($(this).parent());
             });
     });
+
+    $('#order').click(
+        function (e) {
+            e.preventDefault();
+            createOrder();
+        });
+
 });
 
 
@@ -71,6 +78,13 @@ function minus(element) {
     recountShoppingCart();
 }
 
+function remove(element) {
+
+    var tr = $(element).closest('tr');
+    tr.remove();
+    recountShoppingCart();
+}
+
 function recountShoppingCart() {
 
     var productsTotalAmount = 0;
@@ -89,9 +103,10 @@ function recountShoppingCart() {
     $('#cartTotalAmount').text(productsTotalAmount + cartDelivery);
 }
 
-function remove(element) {
+function createOrder() {
 
-    var tr = $(element).closest('tr');
-    tr.remove();
-    recountShoppingCart();
+    var cartTotalAmount = parseInt($('#cartTotalAmount').text()) * 100;
+    var url = "/order?totalAmount=" + cartTotalAmount;
+    location = url;
 }
+

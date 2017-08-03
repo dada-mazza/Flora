@@ -86,7 +86,11 @@
                         <c:forEach var="product" items="${cart.products}">
                             <tr>
                                 <td><img width="60" src="/themes/images/products/${product.id}.png" alt=""/></td>
-                                <td>${product.name}</td>
+                                <td>
+                                        ${product.name}<br/>
+                                    <small>код</small>
+                                    <span class="productId">${product.id}</span>
+                                </td>
                                 <td>
                                     <div class="input-append">
                                         <input class="span1 productQuantity"
@@ -192,7 +196,7 @@
                     </table>
                 </c:if>
                 <a href="/products" class="btn btn-large"><i class="icon-arrow-left"></i> Continue Shopping </a>
-                <a href="" class="btn btn-large pull-right">Pay <i class="icon-arrow-right"></i></a>
+                <a href="" class="btn btn-large pull-right" id="order">Pay <i class="icon-arrow-right"></i></a>
 
             </div>
         </div>

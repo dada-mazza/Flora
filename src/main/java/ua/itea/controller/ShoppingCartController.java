@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import ua.itea.dao.jpa.ProductDAO;
-import ua.itea.entity.Cart;
+import ua.itea.entity.CartEntity;
 import ua.itea.entity.ProductEntity;
 
 import javax.servlet.http.HttpSession;
@@ -31,9 +31,9 @@ public class ShoppingCartController {
     public String addProduct(@RequestParam("productId") Long productId,
                              HttpSession session) {
 
-        Cart cart = (Cart) session.getAttribute("cart");
+        CartEntity cart = (CartEntity) session.getAttribute("cart");
         if (cart == null) {
-            cart = new Cart();
+            cart = new CartEntity();
         }
 
         ProductEntity product = new ProductDAO().getProductById(productId);
@@ -58,9 +58,9 @@ public class ShoppingCartController {
                                          @RequestParam("inputProductQuantity") Integer productQuantity,
                                          HttpSession session) {
 
-        Cart cart = (Cart) session.getAttribute("cart");
+        CartEntity cart = (CartEntity) session.getAttribute("cart");
         if (cart == null) {
-            cart = new Cart();
+            cart = new CartEntity();
         }
 
         if (productQuantity == null || productQuantity < 1) {

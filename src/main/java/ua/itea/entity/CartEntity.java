@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Data
-public class Cart {
+public class CartEntity {
 
     private List<ProductEntity> products = new ArrayList<>();
 

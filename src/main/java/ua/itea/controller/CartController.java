@@ -5,7 +5,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
-import ua.itea.entity.Cart;
+import ua.itea.entity.CartEntity;
 import ua.itea.entity.ProductEntity;
 
 import javax.servlet.http.HttpSession;
@@ -22,9 +22,9 @@ public class CartController {
             @RequestParam("product") String json,
             HttpSession session) {
 
-        Cart cart = (Cart) session.getAttribute("cart");
+        CartEntity cart = (CartEntity) session.getAttribute("cart");
         if (cart == null) {
-            cart = new Cart();
+            cart = new CartEntity();
         }
 
         ProductEntity product = new ProductEntity();
